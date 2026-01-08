@@ -4,6 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 
 // Şartnamedeki kurallara (regex) uygun doğrulama şeması 📜
 const schema = yup.object().shape({
@@ -55,7 +56,7 @@ const Login = () => {
               placeholder="Email" 
               className={errors.email ? "input-error" : ""}
             />
-            {errors.email && <p className="error-text"> {errors.email.message}</p>}
+            {errors.email && <p className="error-text"  style={{color: "red"}}> {errors.email.message}</p>}
           </div>
 
           {/* Şifre Alanı */}
@@ -73,7 +74,7 @@ const Login = () => {
             >
               {showPassword ? <FiEyeOff size={20} /> : <FiEye size={20} />}
             </button>
-            {errors.password && <p className="error-text">⚠️ {errors.password.message}</p>}
+            {errors.password && <p className="error-text" style={{color: "red"}}>{errors.password.message}</p>}
           </div>
 
           {/* Buton Grubu */}
@@ -81,9 +82,9 @@ const Login = () => {
             <button type="submit" className="login-login-btn">
               Login
             </button>
-            <button type="button" className="login-register-btn">
+            <Link to="/register" type="button" className="login-register-btn">
               Register
-            </button>
+            </Link>
           </div>
         </form>
       </div>

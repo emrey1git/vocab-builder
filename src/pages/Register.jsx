@@ -5,7 +5,7 @@ import * as yup from "yup";
 // import "react-toastify/dist/ReactToastify.css";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import React, { useEffect, useState } from "react";
-
+import { Link } from "react-router-dom";
 const schema = yup.object().shape({
   name: yup.string().required("Name is required"),
   email: yup
@@ -48,13 +48,13 @@ const onSubmit = (data) =>{
         <form className="register-inputs" onSubmit={handleSubmit(onSubmit)}>
 
           <input {...register("name")} type="name" placeholder="Name" />
-          {errors.name && <p className="error-message">{errors.name.message}</p>}
+          {errors.name && <p className="error-message"  style={{color: "red"}}>{errors.name.message}</p>}
 
           <input {...register("email")} type="email" placeholder="Email" />
-          {errors.email && <p className="error-message">{errors.email.message}</p>}
+          {errors.email && <p className="error-message"  style={{color: "red"}}>{errors.email.message}</p>}
 
           <input {...register("password")} type={showPassword ? "text" : "password"} placeholder="Password"/>
-          {errors.password && <p className="error-message">{errors.password.message}</p>}
+          {errors.password && <p className="error-message"  style={{color: "red"}}>{errors.password.message}</p>}
 
           <button
             type="button"
@@ -65,7 +65,7 @@ const onSubmit = (data) =>{
           </button>
           <div className="register-buttons">
           <button type="submit" className="register-register-btn">Register</button>
-          <button type="button" className="login-login-btn">Login</button>
+          <Link to="/login" type="button" className="login-login-btn">Login</Link>
         </div>
         </form>
         
