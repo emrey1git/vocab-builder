@@ -1,11 +1,13 @@
 import { toast } from "react-toastify";
-import { useForm} from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 // import "react-toastify/dist/ReactToastify.css";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import axiosInstance from "../api/axiosInstance";
+import { useNavigate } from "react-router-dom";
 const schema = yup.object().shape({
   name: yup.string().required("Name is required"),
   email: yup
@@ -21,20 +23,31 @@ const schema = yup.object().shape({
     .required("Password is required"),
 });
 
-
 const Register = () => {
-    
-const [showPassword, setShowPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
-const { register, handleSubmit, formState: { errors } } = useForm({
-  resolver: yupResolver(schema)
-});
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
+ const navigate = useNavigate();
+  const onSubmit = async (data) => {
+   
+    try {
+      const response = await axiosInstance.post("/users/signup", data);
+      console.log("Sunucudan gelen cevap:", response.data);
 
-const onSubmit = (data) =>{
-    console.log('Form Verileri:', data);
-
-    // backende istek atılacak
-}
+      
+      navigate("/login");
+    } catch (error) {
+      const errorMessage =
+        error.response?.data?.message || "Bir şeyer ters gitti!";
+      toast.error(errorMessage);
+    }
+  };
   return (
     <div className="register-page">
       <div className="register-form">
@@ -46,15 +59,30 @@ const onSubmit = (data) =>{
           </p>
         </div>
         <form className="register-inputs" onSubmit={handleSubmit(onSubmit)}>
-
           <input {...register("name")} type="name" placeholder="Name" />
-          {errors.name && <p className="error-message"  style={{color: "red"}}>{errors.name.message}</p>}
+          {errors.name && (
+            <p className="error-message" style={{ color: "red" }}>
+              {errors.name.message}
+            </p>
+          )}
 
           <input {...register("email")} type="email" placeholder="Email" />
-          {errors.email && <p className="error-message"  style={{color: "red"}}>{errors.email.message}</p>}
+          {errors.email && (
+            <p className="error-message" style={{ color: "red" }}>
+              {errors.email.message}
+            </p>
+          )}
 
-          <input {...register("password")} type={showPassword ? "text" : "password"} placeholder="Password"/>
-          {errors.password && <p className="error-message"  style={{color: "red"}}>{errors.password.message}</p>}
+          <input
+            {...register("password")}
+            type={showPassword ? "text" : "password"}
+            placeholder="Password"
+          />
+          {errors.password && (
+            <p className="error-message" style={{ color: "red" }}>
+              {errors.password.message}
+            </p>
+          )}
 
           <button
             type="button"
@@ -64,11 +92,14 @@ const onSubmit = (data) =>{
             {showPassword ? <FiEyeOff size={20} /> : <FiEye size={20} />}
           </button>
           <div className="register-buttons">
-          <button type="submit" className="register-register-btn">Register</button>
-          <Link to="/login" type="button" className="login-login-btn">Login</Link>
-        </div>
+            <button type="submit" className="register-register-btn">
+              Register
+            </button>
+            <Link to="/login" type="button" className="login-login-btn">
+              Login
+            </Link>
+          </div>
         </form>
-        
       </div>
       <div className="register-page-picture"></div>
     </div>

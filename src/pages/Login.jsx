@@ -5,6 +5,9 @@ import * as yup from "yup";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import Axios from 'axios';
+import axiosInstance from "../api/axiosInstance";
 
 // Şartnamedeki kurallara (regex) uygun doğrulama şeması 📜
 const schema = yup.object().shape({
@@ -32,9 +35,17 @@ const Login = () => {
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = (data) => {
-    console.log("Giriş verileri:", data);
-    // Backend entegrasyonu buraya gelecek 🚀
+  const navigate = useNavigate();
+  const onSubmit = async (data) => {
+   try {
+    const response = await axiosInstance.post("/users/signin", data);
+     console.log("Sunucudan gelen cevap:", response.data);
+
+    navigate('/Dictionary');
+   } catch (error) {
+    const errorMessage= error.response?.data?.message|| 'Bir şeyler ters gitti!';
+    toast.error(errorMessage);
+   }
   };
 
   return (
