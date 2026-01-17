@@ -1,0 +1,51 @@
+
+
+
+.dictionary-page {
+  padding: 40px;
+  background-color: #F8F9FA; /* Sayfanın açık gri arka planı */
+  min-height: 100vh;
+  font-family: 'Rubik', sans-serif; /* Tasarımdaki fonta benzer */
+}
+
+/* Tablonun kendisi - Kart görünümü */
+table {
+  width: 100%;
+  border-collapse: separate; /* Yuvarlak köşeler için separate gerekli */
+  border-spacing: 0;
+  background-color: #ffffff; /* Tablonun beyaz zemini */
+  border-radius: 15px; /* Köşeleri yuvarlatma */
+  overflow: hidden; /* İçerik taşarsa yuvarlaklığı bozmasın */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05); /* Hafif gölge */
+}
+
+/* Tablo Başlıkları (Header) */
+th {
+  background-color: #F8F9FA; /* Başlık şeridinin rengi */
+  color: #8A8A89; /* Gri metin rengi */
+  font-weight: 500;
+  font-size: 18px;
+  text-align: left;
+  padding: 20px 30px; /* Hücre içi geniş boşluk */
+  border-bottom: 1px solid #E0E0E0;
+}
+
+/* Tablo Satırları (Body) */
+td {
+  padding: 22px 30px;
+  color: #121417;
+  font-size: 18px;
+  font-weight: 500;
+  border-bottom: 1px solid #E0E0E0; /* Satır arası çizgiler */
+}
+
+/* Tablonun son satırındaki çizgiyi kaldırmak için */
+tr:last-child td {
+  border-bottom: none;
+}
+
+/* Sütun genişliklerini ayarlama (İsteğe bağlı) */
+th:nth-child(1), td:nth-child(1) { width: 25%; } /* Word */
+th:nth-child(2), td:nth-child(2) { width: 25%; } /* Translation */
+th:nth-child(3), td:nth-child(3) { width: 20%; } /* Category */
+th:nth-child(4), td:nth-child(4) { width: 15%; } /* Progress */

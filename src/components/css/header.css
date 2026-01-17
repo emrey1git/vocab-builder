@@ -1,0 +1,93 @@
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 40px;
+  background-color: #F8F9FA;
+  font-family: 'Rubik', sans-serif;
+}
+
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.brand-name {
+  font-size: 20px;
+  font-weight: 700;
+  color: #121417;
+  text-decoration: none;
+}
+
+.logo-icon {
+  font-size: 24px;
+  color: #85AA9F; 
+}
+
+
+.header-navs {
+  display: flex;
+  gap: 10px; 
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #121417;
+  font-weight: 500;
+  font-size: 16px;
+  padding: 8px 20px;
+  border-radius: 20px; 
+  transition: background-color 0.2s;
+}
+
+
+.nav-link.active {
+  background-color: #85AA9F; 
+  color: white;
+}
+
+
+.user-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.user-name {
+  font-weight: 500;
+  font-size: 18px;
+  color: #121417;
+}
+
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  background-color: #85AA9F;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  overflow: hidden;
+}
+
+.logout-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  color: #121417;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
