@@ -1,51 +1,73 @@
-
-
-
 .dictionary-page {
   padding: 40px;
-  background-color: #F8F9FA; /* Sayfanın açık gri arka planı */
+  background-color: #F8F9FA;
   min-height: 100vh;
-  font-family: 'Rubik', sans-serif; /* Tasarımdaki fonta benzer */
+  font-family: 'Rubik', sans-serif;
 }
 
-/* Tablonun kendisi - Kart görünümü */
-table {
+.dictionary-page table {
   width: 100%;
-  border-collapse: separate; /* Yuvarlak köşeler için separate gerekli */
+  border-collapse: separate;
   border-spacing: 0;
-  background-color: #ffffff; /* Tablonun beyaz zemini */
-  border-radius: 15px; /* Köşeleri yuvarlatma */
-  overflow: hidden; /* İçerik taşarsa yuvarlaklığı bozmasın */
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05); /* Hafif gölge */
+  background-color: #ffffff;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
 }
 
-/* Tablo Başlıkları (Header) */
-th {
-  background-color: #F8F9FA; /* Başlık şeridinin rengi */
-  color: #8A8A89; /* Gri metin rengi */
+.dictionary-page th {
+  background-color: #F8F9FA;
+  color: #8A8A89;
   font-weight: 500;
   font-size: 18px;
   text-align: left;
-  padding: 20px 30px; /* Hücre içi geniş boşluk */
+  padding: 20px 30px;
   border-bottom: 1px solid #E0E0E0;
 }
 
-/* Tablo Satırları (Body) */
-td {
+.dictionary-page th:first-child {
+  border-top-left-radius: 15px;
+}
+
+.dictionary-page th:last-child {
+  border-top-right-radius: 15px;
+}
+
+.dictionary-page td {
   padding: 22px 30px;
   color: #121417;
   font-size: 18px;
   font-weight: 500;
-  border-bottom: 1px solid #E0E0E0; /* Satır arası çizgiler */
+  border-bottom: 1px solid #E0E0E0;
 }
 
-/* Tablonun son satırındaki çizgiyi kaldırmak için */
-tr:last-child td {
+.dictionary-page tr:last-child td {
   border-bottom: none;
 }
 
-/* Sütun genişliklerini ayarlama (İsteğe bağlı) */
-th:nth-child(1), td:nth-child(1) { width: 25%; } /* Word */
-th:nth-child(2), td:nth-child(2) { width: 25%; } /* Translation */
-th:nth-child(3), td:nth-child(3) { width: 20%; } /* Category */
-th:nth-child(4), td:nth-child(4) { width: 15%; } /* Progress */
+.dictionary-page th:nth-child(1), .dictionary-page td:nth-child(1) { width: 25%; }
+.dictionary-page th:nth-child(2), .dictionary-page td:nth-child(2) { width: 25%; }
+.dictionary-page th:nth-child(3), .dictionary-page td:nth-child(3) { width: 20%; }
+.dictionary-page th:nth-child(4), .dictionary-page td:nth-child(4) { width: 15%; }
+
+.dictionary-page table button {
+  background: none;
+  background-color: #F8F9FA;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  padding: 5px;
+  transition: transform 0.2s ease;
+  outline: none;
+}
+
+.dictionary-page table button:hover {
+  transform: scale(1.2);
+}
+
+.dictionary-page td:last-child {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+}
