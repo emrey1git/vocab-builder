@@ -41,6 +41,8 @@ const Login = () => {
     const response = await axiosInstance.post("/users/signin", data);
      console.log("Sunucudan gelen cevap:", response.data);
 
+     localStorage.setItem("token", response.data.token);
+
     navigate('/Dictionary');
    } catch (error) {
     const errorMessage= error.response?.data?.message|| 'Bir şeyler ters gitti!';
