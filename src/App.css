@@ -1,3 +1,7 @@
+body {
+  background-color: #F8F9FA;
+  margin: 0;
+}
 .container {
   max-width: 1140px; /* İçerik en fazla bu kadar geniş olsun (Laptop ekranı gibi) */
   margin: 0 auto;    /* Üst-Alt: 0, Sağ-Sol: OTOMATİK (Bu kodu ortalar) */

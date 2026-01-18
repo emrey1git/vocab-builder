@@ -17,7 +17,7 @@ function App() {
 
   return (
     
-    <div>
+    <div className="container">
       {showHeader && <Header />}{" "}
       <Routes>
         <Route path="/register" element={<Register />} />

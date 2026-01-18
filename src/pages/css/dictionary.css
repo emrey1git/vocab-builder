@@ -5,6 +5,102 @@
   font-family: 'Rubik', sans-serif;
 }
 
+/* Üst Filtre Alanı */
+.filters-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.filters-left, .filters-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Arama Kutusu ve İkon Yerleşimi */
+.search-wrapper {
+  position: relative; /* İkonu içine sabitlemek için */
+  display: flex;
+  align-items: center;
+}
+
+.search-input {
+  padding: 12px 20px;
+  padding-right: 45px; /* İkon için sağda yer bırakıyoruz */
+  border: 1px solid #D1D5DB;
+  border-radius: 15px;
+  font-size: 16px;
+  width: 250px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.search-input:focus {
+  border-color: #85AA9F;
+}
+
+.search-icon {
+  position: absolute;
+  right: 15px;
+  color: #121417;
+  font-size: 20px;
+  pointer-events: none; /* Tıklamayı input'a geçirir */
+}
+
+/* Kategori Seçimi */
+.category-select {
+  padding: 12px 20px;
+  border: 1px solid #D1D5DB;
+  border-radius: 15px;
+  font-size: 16px;
+  background-color: white;
+  color: #121417;
+  outline: none;
+  cursor: pointer;
+}
+
+/* İstatistik ve Linkler */
+.to-study {
+  font-size: 16px;
+  color: rgba(18, 20, 23, 0.5);
+  font-weight: 500;
+}
+
+.study-count {
+  color: #121417;
+  font-weight: 600;
+}
+
+.train-link {
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 600;
+  color: #121417;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.add-word-btn {
+  background: none;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  color: #121417;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.plus-icon {
+  color: #85AA9F;
+  font-size: 22px;
+}
+
+/* Tablo Tasarımı */
 .dictionary-page table {
   width: 100%;
   border-collapse: separate;
@@ -25,14 +121,6 @@
   border-bottom: 1px solid #E0E0E0;
 }
 
-.dictionary-page th:first-child {
-  border-top-left-radius: 15px;
-}
-
-.dictionary-page th:last-child {
-  border-top-right-radius: 15px;
-}
-
 .dictionary-page td {
   padding: 22px 30px;
   color: #121417;
@@ -41,33 +129,32 @@
   border-bottom: 1px solid #E0E0E0;
 }
 
-.dictionary-page tr:last-child td {
-  border-bottom: none;
+/* Progress Halka Tasarımı (Basit Versiyon) */
+.progress-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
-.dictionary-page th:nth-child(1), .dictionary-page td:nth-child(1) { width: 25%; }
-.dictionary-page th:nth-child(2), .dictionary-page td:nth-child(2) { width: 25%; }
-.dictionary-page th:nth-child(3), .dictionary-page td:nth-child(3) { width: 20%; }
-.dictionary-page th:nth-child(4), .dictionary-page td:nth-child(4) { width: 15%; }
-
+/* Düzenle/Sil Butonları */
 .dictionary-page table button {
   background: none;
-  background-color: #F8F9FA;
   border: none;
   cursor: pointer;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   padding: 5px;
-  transition: transform 0.2s ease;
-  outline: none;
+  color: #121417;
+  transition: color 0.2s, transform 0.2s;
 }
 
 .dictionary-page table button:hover {
-  transform: scale(1.2);
+  transform: scale(1.1);
+  color: #85AA9F;
 }
 
 .dictionary-page td:last-child {
   display: flex;
-  gap: 10px;
-  justify-content: center;
+  gap: 15px;
+  justify-content: flex-start;
   align-items: center;
 }
