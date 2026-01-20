@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { LuSearch, LuPlus } from "react-icons/lu";
-import { getRecommendedWords, addWordToDictionary as addWordService } from "../api/wordService.js";
+import getOwnWords, { getRecommendedWords, addWordToDictionary as addWordService } from "../api/wordService.js";
 import WordsTable from "../components/WordsTable.jsx";
 import "./css/dictionary.css";
 
@@ -9,10 +9,13 @@ const RecommendPage = () => {
 
   const fetchRecommended = async () => {
     try {
-      const data = await getRecommendedWords();
-      setWords(data?.results || []);
+      const ownData = await getOwnWords();
+      const recData = await getRecommendedWords();
+      const ownIds = (ownData || []).map(w => w._id);
+      const filtered = (recData?.results || []).filter(word => !ownIds.includes(word._id));
+      setWords(filtered);
     } catch (error) {
-      console.error("Failed to fetch recommended words:", error);
+      console.error("Failed to fetch and filter words:", error);
     }
   };
 
@@ -24,6 +27,8 @@ const RecommendPage = () => {
     try {
       await addWordService(id);
       alert("Word successfully added to your dictionary!");
+      const updatedWords = words.filter(w => w._id !== id);
+      setWords(updatedWords);
     } catch (error) {
       console.error("Error adding word to dictionary:", error);
       alert("Failed to add word. Please try again.");
