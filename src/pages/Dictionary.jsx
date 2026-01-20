@@ -1,34 +1,29 @@
-import React from "react";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { LuSearch, LuPencil, LuTrash2, LuPlus, LuArrowRight } from "react-icons/lu";
-import "./css/dictionary.css";
+import {
+  LuSearch,
+  LuPencil,
+  LuTrash2,
+  LuPlus,
+  LuArrowRight,
+} from "react-icons/lu";
+import wordServices from "../api/wordService.js";
+import WordsTable from "../components/WordsTable.jsx";
 
 const Dictionary = () => {
   const [words, setWords] = useState([]);
 
   const getWords = async () => {
-    const token = localStorage.getItem("token");
-    const response = await fetch(
-      "https://vocab-builder-backend.p.goit.global/api/words/own",
-      {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
-    const data = await response.json();
-    console.log(data);
-    
-    setWords([
-      { _id: "1", en: "Apple", ua: "Яблуко", category: "Fruit", progress: 100 },
-      { _id: "2", en: "Run", ua: "Бігти", category: "Verb", progress: 50 }
-    ]);
+    try {
+      const data = await wordServices();
+      setWords(data.results || []);
+    } catch (error) {
+      console.error("Error occurred while loading words:", error);
+    }
   };
 
   const deleteWord = (id) => {
-    console.log("Silinecek kelime ID:", id);
+    console.log("Word ID to be deleted:", id);
   };
 
   useEffect(() => {
@@ -40,7 +35,11 @@ const Dictionary = () => {
       <div className="filters-container">
         <div className="filters-left">
           <div className="search-wrapper">
-            <input type="text" placeholder="Find the word" className="search-input" />
+            <input
+              type="text"
+              placeholder="Find the word"
+              className="search-input"
+            />
             <LuSearch className="search-icon" />
           </div>
 
@@ -62,7 +61,10 @@ const Dictionary = () => {
 
         <div className="filters-right">
           <div className="to-study">
-            To study: <span className="study-count">{words.filter(w => w.progress < 100).length}</span>
+            To study:{" "}
+            <span className="study-count">
+              {words.filter((w) => w.progress < 100).length}
+            </span>
           </div>
 
           <button className="add-word-btn">
@@ -75,36 +77,19 @@ const Dictionary = () => {
         </div>
       </div>
 
-      <table>
-        <thead>
-          <tr>
-            <th>Word 🇬🇧</th>
-            <th>Translation 🇺🇦</th>
-            <th>Category</th>
-            <th>Progress</th>
-            <th></th>
-          </tr>
-        </thead>
-
-        <tbody>
-          {words.map((word) => (
-            <tr key={word._id}>
-              <td>{word.en}</td>
-              <td>{word.ua}</td>
-              <td>{word.category}</td>
-              <td>{word.progress}%</td>
-              <td>
-                <button onClick={() => console.log("Düzenle", word._id)}>
-                  <LuPencil />
-                </button>
-                <button onClick={() => deleteWord(word._id)}>
-                  <LuTrash2 />
-                </button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <WordsTable
+        words={words}
+        renderActions={(word) => (
+          <div className="action-buttons">
+            <button onClick={() => console.log("Edit word ID:", word._id)}>
+              <LuPencil />
+            </button>
+            <button onClick={() => deleteWord(word._id)}>
+              <LuTrash2 />
+            </button>
+          </div>
+        )}
+      />
     </div>
   );
 };
