@@ -6,7 +6,7 @@ import Training from "./pages/TrainingPage.jsx";
 import { Routes, Route, useLocation } from "react-router-dom";
 import PrivateRoute from "./components/PrivateRoute.jsx";
 import Header from "./components/Header.jsx";
-
+import 'react-toastify/dist/ReactToastify.css';
 import "./App.css";
 
 function App() {
@@ -47,6 +47,7 @@ function App() {
           }
         />
       </Routes>
+      <ToastContainer position="top-right" autoClose={3000} />
     </div>
   );
 }

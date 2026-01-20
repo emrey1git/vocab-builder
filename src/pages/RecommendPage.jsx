@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { LuSearch, LuPlus } from "react-icons/lu";
 import getOwnWords, { getRecommendedWords, addWordToDictionary as addWordService } from "../api/wordService.js";
 import WordsTable from "../components/WordsTable.jsx";
+ import { ToastContainer, toast } from 'react-toastify';  
 import "./css/dictionary.css";
 
 const RecommendPage = () => {
@@ -26,12 +27,13 @@ const RecommendPage = () => {
   const handleAddWord = async (id) => {
     try {
       await addWordService(id);
-      alert("Word successfully added to your dictionary!");
+      toast.success("Word successfully added to your dictionary!");
+      
       const updatedWords = words.filter(w => w._id !== id);
       setWords(updatedWords);
     } catch (error) {
       console.error("Error adding word to dictionary:", error);
-      alert("Failed to add word. Please try again.");
+      toast.error("Failed to add word. Please try again.");
     }
   };
 
