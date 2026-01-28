@@ -7,7 +7,9 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import PrivateRoute from "./components/PrivateRoute.jsx";
 import Header from "./components/Header.jsx";
 import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify'; 
 import "./App.css";
+import TrainingPage from "./pages/TrainingPage.jsx";
 
 function App() {
   const location = useLocation();
@@ -42,7 +44,7 @@ function App() {
           path="/training"
           element={
             <PrivateRoute>
-              <Training />
+              <TrainingPage />
             </PrivateRoute>
           }
         />

@@ -1,29 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import {
-  LuSearch,
-  LuPencil,
-  LuTrash2,
-  LuPlus,
-  LuArrowRight,
-} from "react-icons/lu";
-import wordServices from "../api/wordService.js";
+import { LuSearch, LuPencil, LuTrash2, LuPlus, LuArrowRight } from "react-icons/lu";
+import wordServices, { deleteWordFromServer } from "../api/wordService.js";
 import WordsTable from "../components/WordsTable.jsx";
+import AddWordModal from "../components/AddWordModal.jsx"; 
+import { toast } from "react-toastify";
 
 const Dictionary = () => {
   const [words, setWords] = useState([]);
+  const [isOpen, setIsOpen] = useState(false);
 
   const getWords = async () => {
     try {
       const data = await wordServices();
       setWords(data.results || []);
     } catch (error) {
-      console.error("Error occurred while loading words:", error);
+      console.error("Hata:", error);
     }
-  };
-
-  const deleteWord = (id) => {
-    console.log("Word ID to be deleted:", id);
   };
 
   useEffect(() => {
@@ -33,13 +26,10 @@ const Dictionary = () => {
   return (
     <div className="dictionary-page">
       <div className="filters-container">
+        {/* Figma Sol Kısım: Arama ve Kategoriler */}
         <div className="filters-left">
           <div className="search-wrapper">
-            <input
-              type="text"
-              placeholder="Find the word"
-              className="search-input"
-            />
+            <input type="text" placeholder="Find the word" className="search-input" />
             <LuSearch className="search-icon" />
           </div>
 
@@ -59,15 +49,13 @@ const Dictionary = () => {
           </select>
         </div>
 
+        {/* Figma Sağ Kısım: Sayaç ve Aksiyonlar */}
         <div className="filters-right">
           <div className="to-study">
-            To study:{" "}
-            <span className="study-count">
-              {words.filter((w) => w.progress < 100).length}
-            </span>
+            To study: <span className="study-count">{words.filter(w => w.progress < 100).length}</span>
           </div>
 
-          <button className="add-word-btn">
+          <button className="add-word-btn" onClick={() => setIsOpen(true)}>
             Add word <LuPlus className="plus-icon" />
           </button>
 
@@ -77,19 +65,18 @@ const Dictionary = () => {
         </div>
       </div>
 
-      <WordsTable
-        words={words}
+      <WordsTable 
+        words={words} 
         renderActions={(word) => (
           <div className="action-buttons">
-            <button onClick={() => console.log("Edit word ID:", word._id)}>
-              <LuPencil />
-            </button>
-            <button onClick={() => deleteWord(word._id)}>
-              <LuTrash2 />
-            </button>
+            <button onClick={() => console.log("Edit:", word._id)}><LuPencil /></button>
+            <button onClick={() => deleteWord(word._id)}><LuTrash2 /></button>
           </div>
         )}
       />
+
+      {/* Modal açıldığında senin hazırladığın form görünecek */}
+      {isOpen && <AddWordModal close={() => setIsOpen(false)} />}
     </div>
   );
 };

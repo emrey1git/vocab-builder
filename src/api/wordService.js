@@ -29,5 +29,23 @@ export const addWordToDictionary = async (id) => {
         throw error;
     }
 }
+export const deleteWordFromServer = async (id) => {
+  try {
+    const response = await axiosInstance.delete(`/words/delete/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error deleting word:", error);
+    throw error;
+  }
+};
 
+export const getTrainingWords = async () => {
+  try {
+    const response = await axiosInstance.get("/words/tasks");
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching training tasks:", error);
+    throw error;
+  }
+};
 export default getOwnWords;

@@ -1,0 +1,148 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(2px);
+}
+
+.modal-content {
+  background: #ffffff;
+  padding: 40px;
+  border-radius: 20px;
+  width: 90%;
+  max-width: 550px;
+  position: relative;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  animation: modalAppear 0.3s ease-out;
+}
+
+@keyframes modalAppear {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 28px;
+  cursor: pointer;
+  color: #1a1a1a;
+  transition: color 0.2s;
+}
+
+.modal-close-btn:hover {
+  color: #d33;
+}
+
+.modal-title {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: #121417;
+}
+
+.modal-subtitle {
+  color: #858585;
+  margin-bottom: 30px;
+  font-size: 16px;
+}
+
+.modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.modal-select, 
+.input-wrapper input {
+  width: 100%;
+  padding: 14px 18px;
+  border: 1px solid #dbdbdb;
+  border-radius: 15px;
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.modal-select:focus, 
+.input-wrapper input:focus {
+  border-color: #85aa9f;
+}
+
+.radio-group {
+  display: flex;
+  gap: 25px;
+  margin-top: -10px;
+}
+
+.radio-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.fields-row {
+  display: flex;
+  gap: 20px;
+}
+
+.input-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.input-wrapper label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #858585;
+  text-transform: uppercase;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.btn-add {
+  flex: 2;
+  background: #85aa9f;
+  color: white;
+  border: none;
+  padding: 16px;
+  border-radius: 15px;
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-add:hover {
+  background: #6e8f85;
+}
+
+.btn-cancel {
+  flex: 1;
+  background: #f8f8f8;
+  border: 1px solid #dbdbdb;
+  padding: 16px;
+  border-radius: 15px;
+  color: #858585;
+  font-weight: 600;
+  cursor: pointer;
+}
