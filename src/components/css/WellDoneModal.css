@@ -1,0 +1,79 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.well-done-modal {
+  background: white;
+  border-radius: 30px;
+  padding: 60px;
+  max-width: 500px;
+  width: 90%;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  text-align: center;
+}
+
+.modal-header h2 {
+  font-size: 32px;
+  font-weight: 700;
+  color: #121417;
+  margin: 0 0 30px 0;
+}
+
+.well-done-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.stat-item {
+  background-color: #f8f9fa;
+  border-radius: 15px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.stat-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #858585;
+}
+
+.stat-value {
+  font-size: 24px;
+  font-weight: 700;
+  color: #85AA9F;
+}
+
+.well-done-message {
+  font-size: 16px;
+  color: #121417;
+  margin-bottom: 30px;
+}
+
+.btn-close {
+  background-color: #85AA9F;
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 15px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn-close:hover {
+  background-color: #6B9A8F;
+}

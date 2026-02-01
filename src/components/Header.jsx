@@ -38,16 +38,16 @@ const Header = () => {
         <div className="user-info">
           <span className="user-name">Iryna</span>
       
-          <div className="user-avatar">
-            <img src="" alt="" /> 
-          </div>
+       <div className="user-avatar">
+  <img src="https://placehold.co/40x40?text=User" alt="User Profile" /> 
+</div>
         </div>
         <button className="logout-btn" onClick={handleLogout}>
           Log out &rarr;
         </button>
       </div>
     </header>
-  );
+  );  
 };
 
 export default Header;

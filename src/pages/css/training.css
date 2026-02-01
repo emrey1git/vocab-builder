@@ -40,6 +40,7 @@
   font-size: 32px;
   font-weight: 700;
   width: 100%;
+  height: 50px;
   outline: none;
   color: #1a1a1a;
   background: transparent;
@@ -166,4 +167,21 @@
 
 .next-btn:hover {
   color: #1a1a1a;
+}
+
+.submit-btn {
+  background: #85aa9f;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.3s;
+  align-self: flex-end;
+}
+
+.submit-btn:hover {
+  background: #74968c;
 }

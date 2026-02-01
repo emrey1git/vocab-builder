@@ -5,7 +5,6 @@
   font-family: 'Rubik', sans-serif;
 }
 
-/* Üst Filtre Alanı */
 .filters-container {
   display: flex;
   justify-content: space-between;
@@ -19,16 +18,15 @@
   gap: 20px;
 }
 
-/* Arama Kutusu ve İkon Yerleşimi */
 .search-wrapper {
-  position: relative; /* İkonu içine sabitlemek için */
+  position: relative;
   display: flex;
   align-items: center;
 }
 
 .search-input {
   padding: 12px 20px;
-  padding-right: 45px; /* İkon için sağda yer bırakıyoruz */
+  padding-right: 45px;
   border: 1px solid #D1D5DB;
   border-radius: 15px;
   font-size: 16px;
@@ -46,10 +44,9 @@
   right: 15px;
   color: #121417;
   font-size: 20px;
-  pointer-events: none; /* Tıklamayı input'a geçirir */
+  pointer-events: none;
 }
 
-/* Kategori Seçimi */
 .category-select {
   padding: 12px 20px;
   border: 1px solid #D1D5DB;
@@ -61,7 +58,6 @@
   cursor: pointer;
 }
 
-/* İstatistik ve Linkler */
 .to-study {
   font-size: 16px;
   color: rgba(18, 20, 23, 0.5);
@@ -100,7 +96,6 @@
   font-size: 22px;
 }
 
-/* Tablo Tasarımı */
 .dictionary-page table {
   width: 100%;
   border-collapse: separate;
@@ -129,14 +124,12 @@
   border-bottom: 1px solid #E0E0E0;
 }
 
-/* Progress Halka Tasarımı (Basit Versiyon) */
 .progress-container {
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
-/* Düzenle/Sil Butonları */
 .dictionary-page table button {
   background: none;
   border: none;
