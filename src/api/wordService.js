@@ -85,4 +85,24 @@
     }
   };
 
+  export const updateWord = async (id, wordData) => {
+    try {
+      const formattedData = {
+        en: wordData.en,
+        ua: wordData.ua,
+        category: wordData.category,
+      };
+
+      if (wordData.category === "verb") {
+        formattedData.isIrregular = !wordData.isRegular;
+      }
+
+      const response = await axiosInstance.put(`/words/update/${id}`, formattedData);
+      return response.data;
+    } catch (error) {
+      console.error("Error updating word", error);
+      throw error;
+    }
+  };
+
   export default getOwnWords;

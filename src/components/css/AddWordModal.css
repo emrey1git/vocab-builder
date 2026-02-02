@@ -13,7 +13,7 @@
 }
 
 .modal-content {
-  background: #ffffff;
+  background: #85AA9F;
   padding: 40px;
   border-radius: 20px;
   width: 90%;
@@ -36,25 +36,26 @@
   border: none;
   font-size: 28px;
   cursor: pointer;
-  color: #1a1a1a;
+  color: #ffffff;
   transition: color 0.2s;
 }
 
 .modal-close-btn:hover {
-  color: #d33;
+  color: #e0e0e0;
 }
 
 .modal-title {
   font-size: 28px;
   font-weight: 700;
   margin-bottom: 8px;
-  color: #121417;
+  color: #ffffff;
 }
 
 .modal-subtitle {
-  color: #858585;
+  color: #ffffff;
   margin-bottom: 30px;
   font-size: 16px;
+  opacity: 0.95;
 }
 
 .modal-form {
@@ -67,16 +68,18 @@
 .input-wrapper input {
   width: 100%;
   padding: 14px 18px;
-  border: 1px solid #dbdbdb;
+  border: none;
   border-radius: 15px;
   font-size: 16px;
   outline: none;
-  transition: border-color 0.2s;
+  transition: all 0.2s;
+  background-color: #ffffff;
+  color: #121417;
 }
 
 .modal-select:focus, 
 .input-wrapper input:focus {
-  border-color: #85aa9f;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3);
 }
 
 .radio-group {
@@ -92,6 +95,7 @@
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;
+  color: #ffffff;
 }
 
 .fields-row {
@@ -109,7 +113,7 @@
 .input-wrapper label {
   font-size: 12px;
   font-weight: 600;
-  color: #858585;
+  color: #ffffff;
   text-transform: uppercase;
 }
 
@@ -121,8 +125,8 @@
 
 .btn-add {
   flex: 2;
-  background: #85aa9f;
-  color: white;
+  background: #ffffff;
+  color: #85AA9F;
   border: none;
   padding: 16px;
   border-radius: 15px;
@@ -133,16 +137,21 @@
 }
 
 .btn-add:hover {
-  background: #6e8f85;
+  background: #f0f0f0;
 }
 
 .btn-cancel {
   flex: 1;
-  background: #f8f8f8;
-  border: 1px solid #dbdbdb;
+  background: transparent;
+  border: 2px solid #ffffff;
   padding: 16px;
   border-radius: 15px;
-  color: #858585;
+  color: #ffffff;
   font-weight: 600;
   cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-cancel:hover {
+  background: rgba(255, 255, 255, 0.1);
 }

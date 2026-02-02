@@ -9,7 +9,6 @@ import { useNavigate } from "react-router-dom";
 import Axios from 'axios';
 import axiosInstance from "../api/axiosInstance";
 
-// Şartnamedeki kurallara (regex) uygun doğrulama şeması 📜
 const schema = yup.object().shape({
   email: yup
     .string()
@@ -61,7 +60,7 @@ const Login = () => {
         </div>
 
         <form className="auth-form-fields" onSubmit={handleSubmit(onSubmit)}>
-          {/* Email Alanı */}
+         
           <div className="input-wrapper">
             <input 
               {...register("email")} 
@@ -72,7 +71,7 @@ const Login = () => {
             {errors.email && <p className="error-text"  style={{color: "red"}}> {errors.email.message}</p>}
           </div>
 
-          {/* Şifre Alanı */}
+         
           <div className="input-wrapper password-input-container">
             <input
               {...register("password")}
@@ -90,7 +89,7 @@ const Login = () => {
             {errors.password && <p className="error-text" style={{color: "red"}}>{errors.password.message}</p>}
           </div>
 
-          {/* Buton Grubu */}
+          
           <div className="auth-button-group">
             <button type="submit" className="login-login-btn">
               Login

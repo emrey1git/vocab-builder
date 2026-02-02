@@ -3,13 +3,18 @@ import { Link, useLocation } from "react-router-dom";
 import { LuSearch, LuPencil, LuTrash2, LuPlus, LuArrowRight } from "react-icons/lu";
 import wordServices, { deleteWordFromServer } from "../api/wordService.js";
 import WordsTable from "../components/WordsTable.jsx";
-import AddWordModal from "../components/AddWordModal.jsx"; 
+import AddWordModal from "../components/AddWordModal.jsx";
+import EditWordModal from "../components/EditWordModal.jsx";
+import ukFlag from "../assets/united kingdom.png";
+import uaFlag from "../assets/ukraine (1).png";
 import { toast } from "react-toastify";
 
 const Dictionary = () => {
   const location = useLocation();
   const [words, setWords] = useState([]);
   const [isOpen, setIsOpen] = useState(location.state?.openModal || false);
+  const [isEditOpen, setIsEditOpen] = useState(false);
+  const [editingWord, setEditingWord] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [paginationInfo, setPaginationInfo] = useState({ totalPages: 1, perPage: 10 });
 
@@ -23,6 +28,17 @@ const Dictionary = () => {
       setCurrentPage(page);
     } catch (error) {
       console.error("Error fetching words:", error);
+    }
+  };
+
+  const deleteWord = async (wordId) => {
+    try {
+      await deleteWordFromServer(wordId);
+      toast.success("Word deleted successfully!");
+      getWords();
+    } catch (error) {
+      console.error("Error deleting word:", error);
+      toast.error("Failed to delete word.");
     }
   };
 
@@ -91,7 +107,7 @@ const Dictionary = () => {
         words={words.slice((currentPage - 1) * paginationInfo.perPage, currentPage * paginationInfo.perPage)}
         renderActions={(word) => (
           <div className="action-buttons">
-            <button onClick={() => console.log("Edit:", word._id)}><LuPencil /></button>
+            <button onClick={() => { setEditingWord(word); setIsEditOpen(true); }}><LuPencil /></button>
             <button onClick={() => deleteWord(word._id)}><LuTrash2 /></button>
           </div>
         )}
@@ -144,6 +160,13 @@ const Dictionary = () => {
 
       
       {isOpen && <AddWordModal close={() => { setIsOpen(false); getWords(); }} getWords={null} />}
+      {isEditOpen && editingWord && (
+        <EditWordModal 
+          word={editingWord} 
+          close={() => { setIsEditOpen(false); setEditingWord(null); }} 
+          onSuccess={getWords} 
+        />
+      )}
     </div>
   );
 };

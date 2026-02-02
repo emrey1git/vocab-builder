@@ -15,7 +15,8 @@ const Header = () => {
    
       <div className="logo-container">
        
-        <span className="logo-icon">❖</span> 
+        <span className="logo-icon">
+          <img src="/src/assets/logo.png" alt="VocabBuilder Logo" /></span> 
         <Link to="/dictionary" className="brand-name">VocabBuilder</Link>
       </div>
 
@@ -39,7 +40,7 @@ const Header = () => {
           <span className="user-name">Iryna</span>
       
        <div className="user-avatar">
-  <img src="https://placehold.co/40x40?text=User" alt="User Profile" /> 
+  <img src="/src/assets/gridicons_user.png" alt="User Profile" /> 
 </div>
         </div>
         <button className="logout-btn" onClick={handleLogout}>

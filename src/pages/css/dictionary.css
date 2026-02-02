@@ -145,9 +145,50 @@
   color: #85AA9F;
 }
 
-.dictionary-page td:last-child {
-  display: flex;
-  gap: 15px;
-  justify-content: flex-start;
+.pagination-container {
+  display: flex !important;
+  justify-content: center;
   align-items: center;
+  gap: 8px;
+  margin-top: 30px;
+  flex-wrap: wrap;
+}
+
+.page-btn, .page-number-btn {
+  padding: 8px 16px;
+  border: 1px solid #D1D5DB;
+  background-color: #ffffff;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  color: #121417;
+  transition: all 0.2s;
+}
+
+.page-btn:hover:not(:disabled) {
+  background-color: #85AA9F;
+  color: #ffffff;
+  border-color: #85AA9F;
+}
+
+.page-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.page-number-btn.active {
+  background-color: #85AA9F;
+  color: #ffffff;
+  border-color: #85AA9F;
+  font-weight: 700;
+}
+
+.page-number-btn {
+  min-width: 36px;
+  height: 36px;
+  padding: 6px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

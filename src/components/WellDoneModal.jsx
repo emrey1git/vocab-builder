@@ -1,36 +1,64 @@
 import React from "react";
 import "./css/WellDoneModal.css";
+import bookImage from "../assets/open orange book floating.png";
 
-const WellDoneModal = ({ answered, total, onClose }) => {
+const WellDoneModal = ({ answers, total, onClose, words }) => {
+  const getCorrectAnswers = () => {
+    if (!answers || !words) return 0;
+    return answers.filter((answer, idx) => {
+      const word = words[idx];
+      return word && answer.answer.toLowerCase().trim() === word.ua.toLowerCase().trim();
+    }).length;
+  };
+
+  const correctCount = getCorrectAnswers();
+
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-content well-done-modal" onClick={(e) => e.stopPropagation()}>
-        <div className="modal-header">
-          <h2>Well Done! 🎉</h2>
+        <button className="modal-close-btn" onClick={onClose}>
+          ×
+        </button>
+
+        <div className="well-done-header">
+          <h2>Results</h2>
+          <p>Preview</p>
         </div>
         
-        <div className="well-done-stats">
-          <div className="stat-item">
-            <span className="stat-label">Completed</span>
-            <span className="stat-value">{answered}</span>
-          </div>
-          <div className="stat-item">
-            <span className="stat-label">Total</span>
-            <span className="stat-value">{total}</span>
-          </div>
-          <div className="stat-item">
-            <span className="stat-label">Accuracy</span>
-            <span className="stat-value">{total > 0 ? Math.round((answered / total) * 100) : 0}%</span>
+        <div className="well-done-container">
+          <div className="answers-list">
+          {answers && words && answers.map((answer, idx) => {
+            const word = words[idx];
+            const isCorrect = word && answer.answer.toLowerCase().trim() === word.ua.toLowerCase().trim();
+            return (
+              <div key={idx} className="answer-item">
+                <div className="answer-word">
+                  <span className="en-word">{word?.en}</span>
+                </div>
+                <div className="answer-result">
+                  <span className={`result-status ${isCorrect ? 'correct' : 'incorrect'}`}>
+                    {isCorrect ? '✓ Correct' : '✗ Incorrect'}
+                  </span>
+                  <div className="answer-details">
+                    <span className="correct-answer">{word?.ua}</span>
+                    {!isCorrect && <span className="user-answer">Your answer: {answer.answer}</span>}
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+          <div className="book-image-container">
+            <img src={bookImage} alt="Open book" className="book-image" />
           </div>
         </div>
 
-        <p className="well-done-message">
-          Great job! You've completed your training session.
-        </p>
-
-        <button className="btn-close" onClick={onClose}>
-          Back to Dictionary
-        </button>
+        <div className="well-done-footer">
+          <button className="btn-save" onClick={onClose}>
+            Save
+          </button>
+        </div>
       </div>
     </div>
   );
