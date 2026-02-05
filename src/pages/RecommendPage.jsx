@@ -15,24 +15,29 @@ const RecommendPage = () => {
 
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedVerbType, setSelectedVerbType] = useState("regular");
-
+const [searchKeyword, setSearchKeyword] = useState("");
 
   const fetchWords = async (page) => {
     try {
       setIsLoading(true);
-      const response = await getRecommendedWords(page);
+     const response = await getRecommendedWords({ 
+        page: currentPage, 
+        keyword: searchKeyword, 
+        category: selectedCategory,
+        isIrregular: selectedCategory === "verb" ? selectedVerbType === "irregular" : undefined
+      });
       setWords(response.results || []);
       setTotalPages(response.totalPages || 1);
     } catch (error) {
-      toast.error("Kelime havuzu yüklenemedi.");
+      toast.error("Failed to fetch words.");
     } finally {
       setIsLoading(false);
     }
   };
 
-  useEffect(() => {
-    fetchWords(currentPage);
-  }, [currentPage]);
+useEffect(() => {
+    fetchWords();
+  }, [currentPage, searchKeyword, selectedCategory,selectedVerbType]);
 
   const handleAddToDictionary = async (id) => {
     try {
@@ -47,14 +52,23 @@ const RecommendPage = () => {
   return (
     <div className="dictionary-page">
      
-      <Dashboard 
+     <Dashboard 
         isRecommend={true} 
         statsCount={words.length}
         selectedCategory={selectedCategory}
-        onCategoryChange={(val) => setSelectedCategory(val)}
+        onCategoryChange={(val) => {
+          setSelectedCategory(val);
+          setCurrentPage(1); 
+        }}
         selectedVerbType={selectedVerbType}
-        onVerbTypeChange={(val) => setSelectedVerbType(val)}
-        onSearch={(val) => console.log("Arama:", val)}
+        onVerbTypeChange={(val) => {
+          setSelectedVerbType(val); 
+          setCurrentPage(1);       
+        }}
+        onSearch={(val) => {
+          setSearchKeyword(val);
+          setCurrentPage(1);
+        }}
       />
 
       <WordsTable

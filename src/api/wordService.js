@@ -25,15 +25,22 @@
     }
   }
 
-  export const getRecommendedWords = async () => {
-    try {
-      const response = await axiosInstance.get("/words/all");
-      return response.data; 
-    } catch (error) {
-      console.error("Error fetching recommended words:", error);
-      throw error;
-    }
-  };
+ export const getRecommendedWords = async ({ page = 1, keyword = "", category = "",isIrregular }) => {
+  try {
+    const response = await axiosInstance.get("/words/all", {
+      params: { 
+        page, 
+        keyword, 
+        category,
+        isIrregular
+      }
+    });
+    return response.data; 
+  } catch (error) {
+    console.error("Error fetching recommended words:", error);
+    throw error;
+  }
+};
 
   export const addWordToDictionary = async (id) => {
       try {
