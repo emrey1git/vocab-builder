@@ -1,3 +1,48 @@
-.words-table th .th-content, .words-table td .th-content { display: inline-flex; align-items: center; gap: 8px; }
-.flag-icon { width: 20px; height: 20px; object-fit: contain; display: inline-block; vertical-align: middle; }
-.words-table th { white-space: nowrap; }
+.table-wrapper {
+  background: #FFFFFF;
+  border-radius: 15px;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid #DBDBDB;
+}
+
+.words-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.words-table th {
+  background-color: rgba(133, 170, 159, 0.1);
+  text-align: left;
+  padding: 20px;
+  font-weight: 600;
+  border-bottom: 1px solid #DBDBDB;
+}
+
+.words-table td {
+  padding: 20px;
+  border-bottom: 1px solid #DBDBDB;
+  font-size: 16px;
+}
+
+.flag-icon {
+  width: 24px;
+  height: 24px;
+  vertical-align: middle;
+  margin-left: 10px;
+}
+
+.add-to-dict-btn {
+  background: none;
+  border: none;
+  color: #111;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.add-to-dict-btn:hover {
+  color: #85AA9F;
+}

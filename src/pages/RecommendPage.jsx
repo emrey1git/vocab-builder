@@ -1,68 +1,83 @@
-import React, { useEffect, useState } from "react";
-import { LuSearch, LuPlus } from "react-icons/lu";
-import getOwnWords, { getRecommendedWords, addWordToDictionary as addWordService } from "../api/wordService.js";
+import React, { useState, useEffect } from "react";
+import { LuPlus } from "react-icons/lu";
+import { getRecommendedWords, addWordToDictionary } from "../api/wordService.js";
+import Dashboard from "../components/Dashboard.jsx";
 import WordsTable from "../components/WordsTable.jsx";
- import { ToastContainer, toast } from 'react-toastify';  
+import WordsPagination from "../components/WordsPagination.jsx";
+import { toast, ToastContainer } from "react-toastify";
 import "./css/dictionary.css";
 
 const RecommendPage = () => {
   const [words, setWords] = useState([]);
+  const [totalPages, setTotalPages] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const fetchRecommended = async () => {
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedVerbType, setSelectedVerbType] = useState("regular");
+
+
+  const fetchWords = async (page) => {
     try {
-      const ownData = await getOwnWords();
-      const recData = await getRecommendedWords();
-      const ownIds = (ownData || []).map(w => w._id);
-      const filtered = (recData?.results || []).filter(word => !ownIds.includes(word._id));
-      setWords(filtered);
+      setIsLoading(true);
+      const response = await getRecommendedWords(page);
+      setWords(response.results || []);
+      setTotalPages(response.totalPages || 1);
     } catch (error) {
-      console.error("Failed to fetch and filter words:", error);
+      toast.error("Kelime havuzu yüklenemedi.");
+    } finally {
+      setIsLoading(false);
     }
   };
 
   useEffect(() => {
-    fetchRecommended();
-  }, []);
+    fetchWords(currentPage);
+  }, [currentPage]);
 
-  const handleAddWord = async (id) => {
+  const handleAddToDictionary = async (id) => {
     try {
-      await addWordService(id);
-      toast.success("Word successfully added to your dictionary!");
-      
-      const updatedWords = words.filter(w => w._id !== id);
-      setWords(updatedWords);
+      await addWordToDictionary(id);
+      toast.success("Word added to your dictionary!");
+      setWords((prev) => prev.filter((w) => w._id !== id));
     } catch (error) {
-      console.error("Error adding word to dictionary:", error);
-      toast.error("Failed to add word. Please try again.");
+      toast.error("Could not add word.");
     }
   };
 
   return (
     <div className="dictionary-page">
-      <div className="filters-container">
-        <div className="filters-left">
-          <div className="search-wrapper">
-            <input
-              type="text"
-              placeholder="Find the word"
-              className="search-input"
-            />
-            <LuSearch className="search-icon" />
-          </div>
-        </div>
-      </div>
+     
+      <Dashboard 
+        isRecommend={true} 
+        statsCount={words.length}
+        selectedCategory={selectedCategory}
+        onCategoryChange={(val) => setSelectedCategory(val)}
+        selectedVerbType={selectedVerbType}
+        onVerbTypeChange={(val) => setSelectedVerbType(val)}
+        onSearch={(val) => console.log("Arama:", val)}
+      />
 
       <WordsTable
         words={words}
+        isLoading={isLoading}
         renderActions={(word) => (
           <button
+            type="button"
             className="add-to-dict-btn"
-            onClick={() => handleAddWord(word._id)}
+            onClick={() => handleAddToDictionary(word._id)}
           >
             Add to dictionary <LuPlus />
           </button>
         )}
       />
+
+      <WordsPagination
+        total={totalPages}
+        current={currentPage}
+        onChange={(page) => setCurrentPage(page)}
+      />
+
+      <ToastContainer position="bottom-right" autoClose={2000} />
     </div>
   );
 };

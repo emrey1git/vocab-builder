@@ -1,0 +1,52 @@
+.pagination-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin: 32px 0;
+  width: 100%;
+}
+
+.page-numbers {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.page-num, .page-control {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid rgba(17, 17, 17, 0.1);
+  border-radius: 8px;
+  background-color: #ffffff;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+
+.page-num.active {
+  background-color: #85AA9F;
+  color: #ffffff;
+  border-color: #85AA9F;
+}
+
+.page-control:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.page-dots {
+  padding: 0 4px;
+  color: rgba(17, 17, 17, 0.5);
+  font-weight: 600;
+}
+
+.page-num:hover:not(.active) {
+  border-color: #85AA9F;
+  color: #85AA9F;
+}

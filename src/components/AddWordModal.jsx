@@ -106,7 +106,7 @@ const AddWordModal = ({ close , getWords}) => {
             </div>
           )}
 
-          {/* Yan yana duran inputlar */}
+    
           <div className="fields-row">
             <div className="input-wrapper">
               <label>Ukrainian</label>

@@ -1,0 +1,133 @@
+.dashboard-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.filters-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.search-input-wrapper {
+  position: relative;
+}
+
+.search-input {
+  padding: 12px 18px;
+  padding-right: 45px;
+  border: 1px solid rgba(18, 20, 23, 0.1);
+  border-radius: 15px;
+  width: 274px;
+  font-size: 16px;
+  outline: none;
+}
+
+.search-icon {
+  position: absolute;
+  right: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #121417;
+  font-size: 20px;
+}
+
+.category-select {
+  padding: 12px 18px;
+  border: 1px solid rgba(18, 20, 23, 0.1);
+  border-radius: 15px;
+  min-width: 160px;
+  font-size: 16px;
+  background-color: #fff;
+  cursor: pointer;
+  outline: none;
+}
+
+.radio-group {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.radio-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #121417;
+  position: relative;
+}
+
+.radio-label input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.radio-custom {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(18, 20, 23, 0.2);
+  border-radius: 50%;
+  display: inline-block;
+  position: relative;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.radio-label input[type="radio"]:checked + .radio-custom {
+  border-color: #85AA9F;
+}
+
+.radio-custom::after {
+  content: "";
+  position: absolute;
+  display: none;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #85AA9F;
+}
+
+.radio-label input[type="radio"]:checked + .radio-custom::after {
+  display: block;
+}
+
+.stats-group {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.to-study-text {
+  color: rgba(18, 20, 23, 0.5);
+  font-size: 16px;
+}
+
+.stats-number {
+  color: #121417;
+  font-weight: 600;
+}
+
+.train-link {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #121417;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.train-link:hover {
+  color: #85AA9F;
+}

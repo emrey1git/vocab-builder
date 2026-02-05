@@ -1,15 +1,21 @@
+
 .dictionary-page {
   padding: 40px;
   background-color: #F8F9FA;
   min-height: 100vh;
   font-family: 'Rubik', sans-serif;
+  max-width: 1440px;
+  margin: 0 auto;
 }
+
 
 .filters-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 40px;
+  flex-wrap: wrap;
+  gap: 20px;
 }
 
 .filters-left, .filters-right {
@@ -58,6 +64,7 @@
   cursor: pointer;
 }
 
+
 .to-study {
   font-size: 16px;
   color: rgba(18, 20, 23, 0.5);
@@ -96,6 +103,7 @@
   font-size: 22px;
 }
 
+
 .dictionary-page table {
   width: 100%;
   border-collapse: separate;
@@ -107,88 +115,136 @@
 }
 
 .dictionary-page th {
-  background-color: #F8F9FA;
-  color: #8A8A89;
-  font-weight: 500;
-  font-size: 18px;
+  background-color: rgba(133, 170, 159, 0.1); 
+  color: #121417;
+  font-weight: 600;
+  font-size: 16px;
   text-align: left;
   padding: 20px 30px;
-  border-bottom: 1px solid #E0E0E0;
+  border-bottom: 1px solid #DBDBDB;
 }
 
 .dictionary-page td {
-  padding: 22px 30px;
+  padding: 20px 30px;
   color: #121417;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 500;
-  border-bottom: 1px solid #E0E0E0;
+  border-bottom: 1px solid #DBDBDB;
+  vertical-align: middle;
 }
 
-.progress-container {
+.action-buttons {
   display: flex;
-  align-items: center;
-  gap: 10px;
+  gap: 12px;
 }
 
-.dictionary-page table button {
+.action-buttons button {
   background: none;
   border: none;
   cursor: pointer;
-  font-size: 1.4rem;
   padding: 5px;
-  color: #121417;
-  transition: color 0.2s, transform 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s, color 0.2s;
 }
 
-.dictionary-page table button:hover {
+.action-buttons button:hover {
   transform: scale(1.1);
   color: #85AA9F;
 }
 
-.pagination-container {
+
+.pagination-wrapper {
   display: flex !important;
+  flex-direction: row !important;
   justify-content: center;
   align-items: center;
-  gap: 8px;
-  margin-top: 30px;
-  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  width: 100%;
 }
 
-.page-btn, .page-number-btn {
-  padding: 8px 16px;
-  border: 1px solid #D1D5DB;
-  background-color: #ffffff;
+.page-numbers-row {
+  display: flex !important;
+  flex-direction: row !important;
+  gap: 8px;
+  align-items: center;
+}
+
+
+.page-num, .page-control {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid rgba(18, 20, 23, 0.1);
   border-radius: 8px;
+  background-color: #ffffff;
   cursor: pointer;
+  font-weight: 600;
   font-size: 14px;
-  font-weight: 500;
   color: #121417;
   transition: all 0.2s;
+  padding: 0;
 }
 
-.page-btn:hover:not(:disabled) {
+
+.page-num.active {
   background-color: #85AA9F;
   color: #ffffff;
   border-color: #85AA9F;
 }
 
-.page-btn:disabled {
-  opacity: 0.5;
+.page-control:disabled {
+  opacity: 0.3;
   cursor: not-allowed;
 }
 
-.page-number-btn.active {
-  background-color: #85AA9F;
-  color: #ffffff;
-  border-color: #85AA9F;
-  font-weight: 700;
+.page-dots {
+  color: rgba(18, 20, 23, 0.5);
+  font-weight: 600;
+  padding: 0 4px;
 }
 
-.page-number-btn {
-  min-width: 36px;
-  height: 36px;
-  padding: 6px 10px;
+.page-num:hover:not(.active) {
+  border-color: #85AA9F;
+  color: #85AA9F;
+}
+
+.add-to-dict-btn {
   display: flex;
   align-items: center;
-  justify-content: center;
+  gap: 8px; 
+  background: none; 
+  border: none; 
+  padding: 0;
+  cursor: pointer;
+  font-family: 'Rubik', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  color: #121417; 
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.add-to-dict-btn svg {
+  color: #85AA9F; 
+  font-size: 20px; 
+  transition: transform 0.2s ease;
+}
+
+
+.add-to-dict-btn:hover {
+  color: #85AA9F;
+}
+
+.add-to-dict-btn:hover svg {
+  transform: scale(1.2); 
+}
+
+
+.add-to-dict-btn:active {
+  transform: translateY(1px);
 }
