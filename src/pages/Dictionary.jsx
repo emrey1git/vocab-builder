@@ -1,6 +1,12 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { LuSearch, LuPencil, LuTrash2, LuPlus, LuArrowRight } from "react-icons/lu";
+import {
+  LuSearch,
+  LuPencil,
+  LuTrash2,
+  LuPlus,
+  LuArrowRight,
+} from "react-icons/lu";
 import wordServices, { deleteWordFromServer } from "../api/wordService.js";
 import WordsTable from "../components/WordsTable.jsx";
 import WordsPagination from "../components/WordsPagination.jsx";
@@ -26,7 +32,7 @@ const Dictionary = () => {
       const data = await wordServices({
         page: currentPage,
         keyword: searchKeyword,
-        category: selectedCategory
+        category: selectedCategory,
       });
       setWords(data.results || []);
       setTotalPages(data.totalPages || 1);
@@ -105,8 +111,9 @@ const Dictionary = () => {
 
         <div className="filters-right">
           <div className="to-study">
-            To study: <span className="study-count">
-              {words.filter(w => w.progress < 100).length}
+            To study:{" "}
+            <span className="study-count">
+              {words.filter((w) => w.progress < 100).length}
             </span>
           </div>
 
@@ -124,8 +131,17 @@ const Dictionary = () => {
         words={words}
         renderActions={(word) => (
           <div className="action-buttons">
-            <button onClick={() => { setEditingWord(word); setIsEditOpen(true); }}><LuPencil /></button>
-            <button onClick={() => deleteWord(word._id)}><LuTrash2 /></button>
+            <button
+              onClick={() => {
+                setEditingWord(word);
+                setIsEditOpen(true);
+              }}
+            >
+              <LuPencil />
+            </button>
+            <button onClick={() => deleteWord(word._id)}>
+              <LuTrash2 />
+            </button>
           </div>
         )}
       />
@@ -136,12 +152,17 @@ const Dictionary = () => {
         onChange={(page) => setCurrentPage(page)}
       />
 
-      {isOpen && <AddWordModal close={() => setIsOpen(false)} />}
+      {isOpen && (
+        <AddWordModal close={() => setIsOpen(false)} getWords={getWords} />
+      )}
 
       {isEditOpen && editingWord && (
         <EditWordModal
           word={editingWord}
-          close={() => { setIsEditOpen(false); setEditingWord(null); }}
+          close={() => {
+            setIsEditOpen(false);
+            setEditingWord(null);
+          }}
           onSuccess={getWords}
         />
       )}

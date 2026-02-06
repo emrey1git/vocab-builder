@@ -92,10 +92,10 @@ export const updateWord = async (id, wordData) => {
     };
 
     if (wordData.category === "verb") {
-      formattedData.isIrregular = !wordData.isRegular;
+      formattedData.isIrregular = wordData.isRegular === false;
     }
 
-    const response = await axiosInstance.put(`/words/update/${id}`, formattedData);
+    const response = await axiosInstance.patch(`/words/edit/${id}`, formattedData);
     return response.data;
   } catch (error) {
     console.error("Error updating word", error);
