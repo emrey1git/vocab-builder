@@ -1,3 +1,4 @@
+
 .training-page {
   display: flex;
   flex-direction: column;
@@ -47,9 +48,7 @@
   margin-top: 20px;
 }
 
-.input-side input::placeholder {
-  color: #d1d1d1;
-}
+.input-side input::placeholder { color: #d1d1d1; }
 
 .word-side h3 {
   font-size: 32px;
@@ -88,36 +87,9 @@
   box-shadow: 0 15px 50px rgba(0, 0, 0, 0.04);
 }
 
-.empty-content {
-  flex: 1;
-  text-align: center;
-}
-
-.empty-content h3 {
-  font-size: 24px;
-  font-weight: 700;
-  color: #121417;
-  margin: 0 0 12px 0;
-}
-
-.empty-content p {
-  font-size: 16px;
-  color: #858585;
-  margin: 0 0 30px 0;
-  line-height: 1.5;
-}
-
-.progress-text {
-  font-size: 48px;
-  font-weight: 800;
-  color: #1a1a1a;
-  letter-spacing: -2px;
-}
-  font-size: 48px;
-  font-weight: 800;
-  color: #1a1a1a;
-  letter-spacing: -2px;
-}
+.empty-content { flex: 1; text-align: center; }
+.empty-content h3 { font-size: 24px; font-weight: 700; color: #121417; margin-bottom: 12px; }
+.empty-content p { font-size: 16px; color: #858585; margin-bottom: 30px; line-height: 1.5; }
 
 .footer-actions {
   display: flex;
@@ -159,12 +131,6 @@
   transition: all 0.3s ease;
 }
 
-.btn-cancel:hover {
-  background: #f5f5f5;
-  border-color: #cccccc;
-  color: #1a1a1a;
-}
-
 .next-btn {
   background: transparent;
   border: none;
@@ -175,11 +141,6 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  transition: color 0.2s;
-}
-
-.next-btn:hover {
-  color: #1a1a1a;
 }
 
 .submit-btn {
@@ -189,12 +150,17 @@
   padding: 10px 20px;
   border-radius: 12px;
   font-weight: 600;
-  font-size: 14px;
   cursor: pointer;
-  transition: background 0.3s;
-  align-self: flex-end;
 }
 
-.submit-btn:hover {
-  background: #74968c;
+
+.results-columns {
+  display: flex;
+  gap: 40px;
+  flex: 1;
 }
+
+.results-column { flex: 1; }
+.column-title { font-size: 14px; color: rgba(255,255,255,0.5); margin-bottom: 20px; }
+.word-list { display: flex; flex-direction: column; gap: 12px; }
+.word-item { color: white; font-size: 18px; font-weight: 500; }

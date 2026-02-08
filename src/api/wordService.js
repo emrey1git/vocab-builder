@@ -62,7 +62,15 @@ export const getTrainingWords = async () => {
     throw error;
   }
 };
-
+export const getUserInfo = async () => {
+  try {
+    const response = await axiosInstance.get("/users/current");
+    return response.data;
+  } catch (error) {
+    console.error("User info error:", error);
+    throw error;
+  }
+};
 export const createNewWord = async (wordData) => {
   try {
     const formattedData = {
