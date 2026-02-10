@@ -29,10 +29,21 @@ const EditWordModal = ({ word, close, onSuccess }) => {
       toast.error("Please enter the English word.");
       return;
     }
+    const enRegex = /^[a-zA-Z\s]+$/; 
+  if (!enRegex.test(formData.en)) {
+    toast.error("English field must contain only Latin letters.");
+    return;
+  }
+ 
     if (formData.ua.trim() === "") {
       toast.error("Please enter the Ukrainian word.");
       return;
     }
+     const uaRegex = /^(?![0-9]+$)[а-яА-ЯёЁіІїЇєЄґҐ\s]+$/; 
+  if (!uaRegex.test(formData.ua)) {
+    toast.error("Ukrainian field must contain only Cyrillic letters.");
+    return;
+  }
 
     try {
       await updateWord(word._id, formData);

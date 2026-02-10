@@ -18,10 +18,20 @@ const AddWordModal = ({ close , getWords}) => {
       toast.error("Please enter the English word.");
       return;
     }
+    const enRegex = /^[a-zA-Z\s]+$/; 
+    if (!enRegex.test(formData.en)) {
+      toast.error("English field must contain only Latin letters.");
+      return;
+    }
     if (formData.ua.trim() === "") {
       toast.error("Please enter the Ukrainian word.");
       return;
     }
+     const uaRegex = /^(?![0-9]+$)[а-яА-ЯёЁіІїЇєЄґҐ\s]+$/; 
+      if (!uaRegex.test(formData.ua)) {
+        toast.error("Ukrainian field must contain only Cyrillic letters.");
+        return;
+      }
     try {
       const created = await createNewWord(formData);
       window.dispatchEvent(new CustomEvent("wordsUpdated", { detail: created }));
