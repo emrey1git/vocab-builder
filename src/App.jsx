@@ -10,10 +10,23 @@ import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify'; 
 import "./App.css";
 import TrainingPage from "./pages/TrainingPage.jsx";
+import { useEffect } from "react";
 
 function App() {
   const location = useLocation();
+useEffect(() => {
+    const handleTabClose = () => {
+      
+      localStorage.removeItem('token');
+      localStorage.removeItem('user'); 
+    };
 
+    window.addEventListener('beforeunload', handleTabClose);
+
+    return () => {
+      window.removeEventListener('beforeunload', handleTabClose);
+    };
+  }, []);
   const showHeader =
     location.pathname !== "/login" && location.pathname !== "/register";
 
