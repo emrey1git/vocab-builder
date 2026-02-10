@@ -6,25 +6,27 @@ import "./css/header.css";
 const Header = () => {
   const navigate = useNavigate();
   const [userName, setUserName] = useState("User");
- useEffect(() => {
+  const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
+
+  useEffect(() => {
     const fetchUser = async () => {
       try {
         const data = await getUserInfo();
         if (data && data.name) {
           setUserName(data.name);
-         
           localStorage.setItem("name", data.name);
         }
       } catch (err) {
         console.log("User information could not be retrieved.", err);
       }
     };
-
     fetchUser();
   }, []);
+
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("name");
+    setIsLogoutModalOpen(false);
     navigate("/login");
   };
 
@@ -54,15 +56,31 @@ const Header = () => {
       <div className="user-actions">
         <div className="user-info">
           <span className="user-name">{userName}</span>
-
           <div className="user-avatar">
             <img src="/src/assets/gridicons_user.png" alt="User Profile" />
           </div>
         </div>
-        <button className="logout-btn" onClick={handleLogout}>
+        <button className="logout-btn" onClick={() => setIsLogoutModalOpen(true)}>
           Log out &rarr;
         </button>
       </div>
+
+      {isLogoutModalOpen && (
+        <div className="modal-overlay" onClick={() => setIsLogoutModalOpen(false)}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <h2 className="modal-title">Log out</h2>
+            <p className="modal-subtitle">Are you sure you want to log out?</p>
+            <div className="modal-actions">
+              <button className="btn-add" onClick={handleLogout}>
+                Log out
+              </button>
+              <button className="btn-cancel" onClick={() => setIsLogoutModalOpen(false)}>
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </header>
   );
 };
