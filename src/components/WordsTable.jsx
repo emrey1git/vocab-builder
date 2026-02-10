@@ -1,15 +1,25 @@
 import React from "react";
 import ukFlag from "../assets/united kingdom.png";
 import uaFlag from "../assets/ukraine (1).png";
-import "./css/WordsTable.css"; 
+import "./css/WordsTable.css";
 
 const WordsTable = ({ words, renderActions }) => {
   return (
     <table className="words-table">
       <thead>
         <tr>
-          <th><span className="th-content"><span>Word</span><img src={ukFlag} alt="UK Flag" className="flag-icon" /></span></th>
-          <th><span className="th-content"><span>Translation</span><img src={uaFlag} alt="Ukraine Flag" className="flag-icon" /></span></th>
+          <th>
+            <span className="th-content">
+              <span>Word</span>
+              <img src={ukFlag} alt="UK Flag" className="flag-icon" />
+            </span>
+          </th>
+          <th>
+            <span className="th-content">
+              <span>Translation</span>
+              <img src={uaFlag} alt="Ukraine Flag" className="flag-icon" />
+            </span>
+          </th>
           <th>Category</th>
           <th>Progress</th>
           <th></th>
@@ -23,9 +33,7 @@ const WordsTable = ({ words, renderActions }) => {
               <td>{word.ua}</td>
               <td>{word.category}</td>
               <td>{word.progress}%</td>
-              <td>
-                {renderActions && renderActions(word)}
-              </td>
+              <td>{renderActions && renderActions(word)}</td>
             </tr>
           ))
         ) : (

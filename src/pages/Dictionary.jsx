@@ -26,12 +26,15 @@ const Dictionary = () => {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [totalPages, setTotalPages] = useState(1);
   const [totalToStudy, setTotalToStudy] = useState(0);
+
+  // Silme Onay Modalı State'leri
+  const [isDeleteOpen, setIsDeleteOpen] = useState(false);
+  const [wordToDeleteId, setWordToDeleteId] = useState(null);
+
   const timerRef = useRef(null);
 
-  // 1. getWords fonksiyonunu useCallback ile sarmaladık (Sarı çizgileri bitiren hamle)
   const getWords = useCallback(async () => {
     try {
-      // Kelime listesini çek
       const data = await wordServices({
         page: currentPage,
         keyword: searchKeyword,
@@ -40,7 +43,6 @@ const Dictionary = () => {
       setWords(data.results || []);
       setTotalPages(data.totalPages || 1);
 
-      // İstatistikleri (To study rakamı) çek
       const stats = await getStatistics();
       setTotalToStudy(stats.totalCount || 0);
     } catch (error) {
@@ -48,12 +50,10 @@ const Dictionary = () => {
     }
   }, [currentPage, searchKeyword, selectedCategory]);
 
-  // Sayfa yüklendiğinde ve filtreler değiştikçe çalışır
   useEffect(() => {
     getWords();
   }, [getWords]);
 
-  // Modal kapandığında veriyi tazeler
   useEffect(() => {
     if (!isOpen) {
       getWords();
@@ -145,7 +145,12 @@ const Dictionary = () => {
             >
               <LuPencil />
             </button>
-            <button onClick={() => deleteWord(word._id)}>
+            <button
+              onClick={() => {
+                setWordToDeleteId(word._id);
+                setIsDeleteOpen(true);
+              }}
+            >
               <LuTrash2 />
             </button>
           </div>
@@ -158,6 +163,8 @@ const Dictionary = () => {
         onChange={(page) => setCurrentPage(page)}
       />
 
+      {/* MODAL BÖLÜMÜ */}
+      
       {isOpen && (
         <AddWordModal close={() => setIsOpen(false)} getWords={getWords} />
       )}
@@ -172,6 +179,34 @@ const Dictionary = () => {
           onSuccess={getWords}
         />
       )}
+
+      {/* SİLME ONAY MODALI */}
+      {isDeleteOpen && (
+        <div className="modal-overlay" onClick={() => setIsDeleteOpen(false)}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <h2 className="modal-title">Delete word</h2>
+            <p className="modal-subtitle">
+              Are you sure you want to delete this word? This action cannot be undone.
+            </p>
+            <div className="modal-actions">
+              <button
+                className="btn-add"
+                style={{ backgroundColor: "#D42C2C", color: "white" }}
+                onClick={() => {
+                  deleteWord(wordToDeleteId);
+                  setIsDeleteOpen(false);
+                }}
+              >
+                Delete
+              </button>
+              <button className="btn-cancel" onClick={() => setIsDeleteOpen(false)}>
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       <ToastContainer position="bottom-right" />
     </div>
   );

@@ -3,7 +3,7 @@ import "./css/WellDoneModal.css";
 import bookImage from "../assets/open orange book floating.png";
 
 const WellDoneModal = ({ answers, onClose }) => {
-  // Senin yazdığın cevap (task) ile gerçek karşılığı (ua) karşılaştırıyoruz
+
   const correctOnes = answers.filter(a => a.task.toLowerCase().trim() === a.ua.toLowerCase().trim());
   const mistakes = answers.filter(a => a.task.toLowerCase().trim() !== a.ua.toLowerCase().trim());
 
