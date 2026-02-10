@@ -1,26 +1,36 @@
-import React, { useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { LuSearch, LuArrowUpRight } from "react-icons/lu";
+import { getStatistics } from "../api/wordService.js";  
 import "./css/dashboard.css";
 
 const Dashboard = ({
   isRecommend = false,
-  statsCount = 0,
+  refreshTrigger, // Tetikleyiciyi buradan alıyoruz 🎯
   onSearch,
   onCategoryChange,
   onVerbTypeChange,
   selectedCategory,
   selectedVerbType,
 }) => {
+  const [liveStats, setLiveStats] = useState(0);
   const timerRef = useRef(null);
+
+  useEffect(() => {
+    const fetchStats = async () => {
+      try {
+        const data = await getStatistics();
+        setLiveStats(data.totalCount || 0);
+      } catch (err) {
+        console.error("Dashboard stats error:", err);
+      }
+    };
+    fetchStats();
+  }, [refreshTrigger]); // Tetikleyici değiştiğinde rakamı tazele! ✨
 
   const handleSearchChange = (e) => {
     const value = e.target.value;
-
-    if (timerRef.current) {
-      clearTimeout(timerRef.current);
-    }
-
+    if (timerRef.current) clearTimeout(timerRef.current);
     timerRef.current = setTimeout(() => {
       onSearch(value);
     }, 300);
@@ -90,7 +100,7 @@ const Dashboard = ({
 
       <div className="stats-group">
         <p className="to-study-text">
-          To study: <span className="stats-number">{statsCount}</span>
+          To study: <span className="stats-number">{liveStats}</span>
         </p>
         <Link to="/training" className="train-link">
           Train oneself <LuArrowUpRight />

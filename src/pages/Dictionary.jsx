@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useCallback } from "react";
 import { Link, useLocation } from "react-router-dom";
 import {
   LuSearch,
@@ -7,7 +7,7 @@ import {
   LuPlus,
   LuArrowRight,
 } from "react-icons/lu";
-import wordServices, { deleteWordFromServer } from "../api/wordService.js";
+import wordServices, { deleteWordFromServer, getStatistics } from "../api/wordService.js";
 import WordsTable from "../components/WordsTable.jsx";
 import WordsPagination from "../components/WordsPagination.jsx";
 import AddWordModal from "../components/AddWordModal.jsx";
@@ -25,10 +25,13 @@ const Dictionary = () => {
   const [searchKeyword, setSearchKeyword] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
   const [totalPages, setTotalPages] = useState(1);
+  const [totalToStudy, setTotalToStudy] = useState(0);
   const timerRef = useRef(null);
 
-  const getWords = async () => {
+  // 1. getWords fonksiyonunu useCallback ile sarmaladık (Sarı çizgileri bitiren hamle)
+  const getWords = useCallback(async () => {
     try {
+      // Kelime listesini çek
       const data = await wordServices({
         page: currentPage,
         keyword: searchKeyword,
@@ -36,25 +39,31 @@ const Dictionary = () => {
       });
       setWords(data.results || []);
       setTotalPages(data.totalPages || 1);
-    } catch (error) {
-      console.error("Error fetching words:", error);
-    }
-  };
 
-  useEffect(() => {
-    getWords();
+      // İstatistikleri (To study rakamı) çek
+      const stats = await getStatistics();
+      setTotalToStudy(stats.totalCount || 0);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
   }, [currentPage, searchKeyword, selectedCategory]);
 
+  // Sayfa yüklendiğinde ve filtreler değiştikçe çalışır
+  useEffect(() => {
+    getWords();
+  }, [getWords]);
+
+  // Modal kapandığında veriyi tazeler
   useEffect(() => {
     if (!isOpen) {
       getWords();
     }
-  }, [isOpen]);
+  }, [isOpen, getWords]);
 
   const deleteWord = async (wordId) => {
     try {
       await deleteWordFromServer(wordId);
-      toast.success("Word deleted!");
+      toast.success("Word deleted! 🔥");
       getWords();
     } catch (error) {
       toast.error("Delete failed.");
@@ -111,10 +120,7 @@ const Dictionary = () => {
 
         <div className="filters-right">
           <div className="to-study">
-            To study:{" "}
-            <span className="study-count">
-              {words.filter((w) => w.progress < 100).length}
-            </span>
+            To study: <span className="study-count">{totalToStudy}</span>
           </div>
 
           <button className="add-word-btn" onClick={() => setIsOpen(true)}>

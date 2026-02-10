@@ -43,6 +43,15 @@ export const addWordToDictionary = async (id) => {
   }
 };
 
+export const getStatistics = async () =>{
+  try {
+    const response = await axiosInstance.get("/words/statistics");  return response.data;
+  } catch (error) {
+    console.error("Error fetching statistics:", error);
+    throw error;
+    
+  }
+}
 export const deleteWordFromServer = async (id) => {
   try {
     const response = await axiosInstance.delete(`/words/delete/${id}`);

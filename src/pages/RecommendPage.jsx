@@ -12,15 +12,17 @@ const RecommendPage = () => {
   const [totalPages, setTotalPages] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
-
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedVerbType, setSelectedVerbType] = useState("regular");
-const [searchKeyword, setSearchKeyword] = useState("");
+  const [searchKeyword, setSearchKeyword] = useState("");
 
-  const fetchWords = async (page) => {
+  // TETİKLEYİCİ: Sayı güncellensin diye ekledik 🎯
+  const [refreshStats, setRefreshStats] = useState(false);
+
+  const fetchWords = async () => {
     try {
       setIsLoading(true);
-     const response = await getRecommendedWords({ 
+      const response = await getRecommendedWords({ 
         page: currentPage, 
         keyword: searchKeyword, 
         category: selectedCategory,
@@ -35,14 +37,18 @@ const [searchKeyword, setSearchKeyword] = useState("");
     }
   };
 
-useEffect(() => {
+  useEffect(() => {
     fetchWords();
-  }, [currentPage, searchKeyword, selectedCategory,selectedVerbType]);
+  }, [currentPage, searchKeyword, selectedCategory, selectedVerbType]);
 
   const handleAddToDictionary = async (id) => {
     try {
       await addWordToDictionary(id);
       toast.success("Word added to your dictionary!");
+      
+      // KELİME EKLENİNCE TETİKLE! ✨
+      setRefreshStats(prev => !prev); 
+      
       setWords((prev) => prev.filter((w) => w._id !== id));
     } catch (error) {
       toast.error("Could not add word.");
@@ -51,10 +57,10 @@ useEffect(() => {
 
   return (
     <div className="dictionary-page">
-     
-     <Dashboard 
+      <Dashboard 
         isRecommend={true} 
-        statsCount={words.length}
+        // statsCount yerine artık bu sinyali gönderiyoruz
+        refreshTrigger={refreshStats} 
         selectedCategory={selectedCategory}
         onCategoryChange={(val) => {
           setSelectedCategory(val);
