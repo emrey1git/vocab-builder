@@ -4,8 +4,7 @@ import axiosInstance from "../api/axiosInstance";
 import getOwnWords from "../api/wordService.js";
 import ProgressBar from "../components/ProgressBar.jsx";
 import WellDoneModal from "../components/WellDoneModal.jsx";
-import ukFlag from "../assets/united kingdom.png";
-import uaFlag from "../assets/ukraine (1).png";
+
 import { toast } from "react-toastify";
 import "./css/training.css";
 
@@ -101,7 +100,7 @@ const TrainingPage = () => {
         <div className="card-side input-side">
           <div>
             <div className="lang-label">
-              <img src={uaFlag} className="flag-icon" alt="UA" />
+              <img src="/ukraine (1).png" className="flag-icon" alt="UA" />
               <span>Ukrainian</span>
             </div>
         
@@ -128,7 +127,7 @@ const TrainingPage = () => {
         <div className="card-side word-side">
           <div>
             <div className="lang-label">
-              <img src={ukFlag} className="flag-icon" alt="EN" />
+              <img src="/united kingdom.png" className="flag-icon" alt="EN" />
               <span>English</span>
             </div>
             <h3>{currentWord?.en}</h3>

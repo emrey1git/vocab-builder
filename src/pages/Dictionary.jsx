@@ -163,7 +163,6 @@ const Dictionary = () => {
         onChange={(page) => setCurrentPage(page)}
       />
 
-       MODAL BÖLÜMÜ */}
       
       {isOpen && (
         <AddWordModal close={() => setIsOpen(false)} getWords={getWords} />

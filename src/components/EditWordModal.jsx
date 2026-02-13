@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import { updateWord } from "../api/wordService.js";
-import ukFlag from "/united kingdom.png";
-import uaFlag from "/ukraine (1).png";
+
 import "./css/EditWordModal.css";
 
 const EditWordModal = ({ word, close, onSuccess }) => {
@@ -48,7 +47,7 @@ const EditWordModal = ({ word, close, onSuccess }) => {
                 placeholder="Ukrainian translation"
               />
               <div className="edit-lang-info">
-                <img src={uaFlag} alt="UA" className="edit-flag" />
+                <img src="/ukraine (1).png" alt="UA" className="edit-flag" />
                 <span>Ukrainian</span>
               </div>
             </div>
@@ -64,7 +63,7 @@ const EditWordModal = ({ word, close, onSuccess }) => {
                 placeholder="English word"
               />
               <div className="edit-lang-info">
-                <img src={ukFlag} alt="UK" className="edit-flag" />
+                <img src="/united kingdom.png" alt="UK" className="edit-flag" />
                 <span>English</span>
               </div>
             </div>

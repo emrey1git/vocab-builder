@@ -1,6 +1,5 @@
 import React from "react";
-import ukFlag from "/united kingdom.png";
-import uaFlag from "/ukraine (1).png";
+
 import "./css/WordsTable.css";
 
 const WordsTable = ({ words, renderActions }) => {
@@ -12,13 +11,13 @@ const WordsTable = ({ words, renderActions }) => {
           <th>
             <span className="th-content">
               <span>Word</span>
-              <img src={ukFlag} alt="UK Flag" className="flag-icon" />
+              <img src="/united kingdom.png" alt="UK Flag" className="flag-icon" />
             </span>
           </th>
           <th>
             <span className="th-content">
               <span>Translation</span>
-              <img src={uaFlag} alt="Ukraine Flag" className="flag-icon" />
+              <img src="/ukraine (1).png" alt="Ukraine Flag" className="flag-icon" />
             </span>
           </th>
           <th>Category</th>

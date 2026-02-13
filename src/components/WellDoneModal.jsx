@@ -1,6 +1,6 @@
 import React from "react";
 import "./css/WellDoneModal.css";
-import bookImage from "/open orange book floating.png";
+
 
 const WellDoneModal = ({ answers, onClose }) => {
 
@@ -40,7 +40,7 @@ const WellDoneModal = ({ answers, onClose }) => {
           </div>
 
           <div className="book-image-container">
-            <img src={bookImage} alt="Results" className="book-image" />
+            <img src="/open orange book floating.png" alt="Results" className="book-image" />
           </div>
         </div>
 
