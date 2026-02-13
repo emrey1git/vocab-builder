@@ -1,22 +1,21 @@
+import React, { useEffect } from "react";
+import { Routes, Route, useLocation, Navigate } from "react-router-dom";
 import Register from "./pages/Register.jsx";
 import Login from "./pages/Login.jsx";
 import Dictionary from "./pages/Dictionary.jsx";
 import Recommend from "./pages/RecommendPage.jsx";
-import Training from "./pages/TrainingPage.jsx";
-import { Routes, Route, useLocation } from "react-router-dom";
-import PrivateRoute from "./components/PrivateRoute.jsx";
 import Header from "./components/Header.jsx";
-import 'react-toastify/dist/ReactToastify.css';
-import { ToastContainer } from 'react-toastify'; 
-import "./App.css";
+import PrivateRoute from "./components/PrivateRoute.jsx";
 import TrainingPage from "./pages/TrainingPage.jsx";
-import { useEffect } from "react";
+import { ToastContainer } from 'react-toastify'; 
+import 'react-toastify/dist/ReactToastify.css';
+import "./App.css";
 
 function App() {
   const location = useLocation();
-useEffect(() => {
+
+  useEffect(() => {
     const handleTabClose = () => {
-      
       localStorage.removeItem('token');
       localStorage.removeItem('user'); 
     };
@@ -27,14 +26,14 @@ useEffect(() => {
       window.removeEventListener('beforeunload', handleTabClose);
     };
   }, []);
-  const showHeader =
-    location.pathname !== "/login" && location.pathname !== "/register";
+
+  const showHeader = location.pathname !== "/login" && location.pathname !== "/register";
 
   return (
-    
     <div className="container">
-      {showHeader && <Header />}{" "}
+      {showHeader && <Header />}
       <Routes>
+        <Route path="/" element={<Navigate to="/login" replace />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route
@@ -61,6 +60,7 @@ useEffect(() => {
             </PrivateRoute>
           }
         />
+        <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>
       <ToastContainer position="top-right" autoClose={3000} />
     </div>
