@@ -27,7 +27,7 @@ const Dictionary = () => {
   const [totalPages, setTotalPages] = useState(1);
   const [totalToStudy, setTotalToStudy] = useState(0);
 
-  // Silme Onay Modalı State'leri
+
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
   const [wordToDeleteId, setWordToDeleteId] = useState(null);
 
@@ -163,7 +163,7 @@ const Dictionary = () => {
         onChange={(page) => setCurrentPage(page)}
       />
 
-      {/* MODAL BÖLÜMÜ */}
+       MODAL BÖLÜMÜ */}
       
       {isOpen && (
         <AddWordModal close={() => setIsOpen(false)} getWords={getWords} />
@@ -180,7 +180,7 @@ const Dictionary = () => {
         />
       )}
 
-      {/* SİLME ONAY MODALI */}
+      
       {isDeleteOpen && (
         <div className="modal-overlay" onClick={() => setIsDeleteOpen(false)}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>

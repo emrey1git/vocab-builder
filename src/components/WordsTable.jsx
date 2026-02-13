@@ -1,6 +1,6 @@
 import React from "react";
-import ukFlag from "../assets/united kingdom.png";
-import uaFlag from "../assets/ukraine (1).png";
+import ukFlag from "/united kingdom.png";
+import uaFlag from "/ukraine (1).png";
 import "./css/WordsTable.css";
 
 const WordsTable = ({ words, renderActions }) => {

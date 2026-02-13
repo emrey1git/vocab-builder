@@ -45,7 +45,7 @@ const Login = () => {
       <div className="auth-card">
         <div className="login-form-container">
           <div className="auth-logo">
-             <img src="/src/assets/logo.png" alt="Logo" />
+             <img src="/logo.png" alt="Logo" />
              <span>VocabBuilder</span>
           </div>
           
@@ -92,9 +92,9 @@ const Login = () => {
         </div>
 
         <div className="auth-hero-banner">
-          <img src="/src/assets/illustration.png" alt="Illustration" className="hero-img" />
+          <img src="/illustration.png" alt="Illustration" className="hero-img" />
           <p className="hero-footer-text">Word · Translation · Grammar · Progress</p>
-          <img src="/src/assets/Vector (2).png" alt="Vector" className="vector-shadow" />
+          <img src="/Vector (2).png" alt="Vector" className="vector-shadow" />
         </div>
       </div>
       <ToastContainer position="bottom-right" />

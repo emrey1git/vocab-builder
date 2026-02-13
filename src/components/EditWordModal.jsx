@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import { updateWord } from "../api/wordService.js";
-import ukFlag from "../assets/united kingdom.png";
-import uaFlag from "../assets/ukraine (1).png";
+import ukFlag from "/united kingdom.png";
+import uaFlag from "/ukraine (1).png";
 import "./css/EditWordModal.css";
 
 const EditWordModal = ({ word, close, onSuccess }) => {

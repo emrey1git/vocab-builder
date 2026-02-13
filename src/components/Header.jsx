@@ -39,14 +39,13 @@ const Header = () => {
     <header className="header">
       <div className="logo-container">
         <span className="logo-icon">
-          <img src="/src/assets/logo.png" alt="VocabBuilder Logo" />
+          <img src="/logo.png" alt="VocabBuilder Logo" />
         </span>
         <Link to="/dictionary" className="brand-name">
           VocabBuilder
         </Link>
       </div>
 
-      {/* Menü listesi - Mobil durumuna göre class alıyor */}
       <nav className={`header-navs ${isMenuOpen ? "mobile-open" : ""}`}>
         <Link 
           to="/dictionary" 
@@ -75,14 +74,13 @@ const Header = () => {
         <div className="user-info">
           <span className="user-name">{userName}</span>
           <div className="user-avatar">
-            <img src="/src/assets/gridicons_user.png" alt="User Profile" />
+            <img src="/gridicons_user.png" alt="User Profile" />
           </div>
         </div>
         <button className="logout-btn" onClick={() => setIsLogoutModalOpen(true)}>
           Log out &rarr;
         </button>
 
-        {/* Burger Butonu - Sadece Mobilde Görünür */}
         <button className="burger-icon" onClick={() => setIsMenuOpen(!isMenuOpen)}>
           {isMenuOpen ? <LuX /> : <LuMenu />}
         </button>

@@ -16,7 +16,7 @@ const RecommendPage = () => {
   const [selectedVerbType, setSelectedVerbType] = useState("regular");
   const [searchKeyword, setSearchKeyword] = useState("");
 
-  // TETİKLEYİCİ: Sayı güncellensin diye ekledik 🎯
+
   const [refreshStats, setRefreshStats] = useState(false);
 
   const fetchWords = async () => {
@@ -46,7 +46,6 @@ const RecommendPage = () => {
       await addWordToDictionary(id);
       toast.success("Word added to your dictionary!");
       
-      // KELİME EKLENİNCE TETİKLE! ✨
       setRefreshStats(prev => !prev); 
       
       setWords((prev) => prev.filter((w) => w._id !== id));
@@ -59,7 +58,7 @@ const RecommendPage = () => {
     <div className="dictionary-page">
       <Dashboard 
         isRecommend={true} 
-        // statsCount yerine artık bu sinyali gönderiyoruz
+       
         refreshTrigger={refreshStats} 
         selectedCategory={selectedCategory}
         onCategoryChange={(val) => {

@@ -1,6 +1,6 @@
 import React from "react";
 import "./css/WellDoneModal.css";
-import bookImage from "../assets/open orange book floating.png";
+import bookImage from "/open orange book floating.png";
 
 const WellDoneModal = ({ answers, onClose }) => {
 

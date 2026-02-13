@@ -6,7 +6,7 @@ import "./css/dashboard.css";
 
 const Dashboard = ({
   isRecommend = false,
-  refreshTrigger, // Tetikleyiciyi buradan alıyoruz 🎯
+  refreshTrigger, 
   onSearch,
   onCategoryChange,
   onVerbTypeChange,
@@ -26,7 +26,7 @@ const Dashboard = ({
       }
     };
     fetchStats();
-  }, [refreshTrigger]); // Tetikleyici değiştiğinde rakamı tazele! ✨
+  }, [refreshTrigger]); 
 
   const handleSearchChange = (e) => {
     const value = e.target.value;
@@ -110,4 +110,4 @@ const Dashboard = ({
   );
 };
 
-export default Dashboard;
+export default Dashboard; 

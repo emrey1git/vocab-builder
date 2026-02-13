@@ -26,7 +26,7 @@ const TrainingPage = () => {
       setWords(results);
     } catch (error) {
       console.error("Loading error:", error);
-      toast.error("Words could not be loaded."); // İngilizceye çevrildi
+      toast.error("Words could not be loaded."); 
     } finally {
       setLoading(false);
     }
@@ -77,14 +77,13 @@ const TrainingPage = () => {
       setAnswers(finalAnswers);
       setShowWellDone(true);
     } catch (error) {
-      console.error("Submission error:", error); // İngilizceye çevrildi
-      toast.error("Failed to save training results."); // İngilizceye çevrildi
+      console.error("Submission error:", error);
+      toast.error("Failed to save training results."); 
       setAnswers(finalAnswers);
       setShowWellDone(true);
     }
   };
 
-  // Yeni Şık Loading Popup/Overlay
   if (loading) {
     return (
       <div className="loader-overlay">
@@ -108,7 +107,7 @@ const TrainingPage = () => {
         
             <input 
               type="text" 
-              placeholder="Enter translation" // İngilizceye çevrildi
+              placeholder="Enter translation"
               value={userAnswer}
               onChange={(e) => setUserAnswer(e.target.value)}
               autoFocus
