@@ -131,3 +131,29 @@
 .train-link:hover {
   color: #85AA9F;
 }
+
+@media (max-width: 768px) {
+  .dashboard-container {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 15px;
+  }
+
+  .filters-group {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .search-input-wrapper, 
+  .search-input, 
+  .category-select, 
+  .select-wrapper {
+    width: 100% !important; 
+  }
+
+  .stats-group {
+    justify-content: space-between;
+    padding: 10px 5px;
+    border-top: 1px solid rgba(18, 20, 23, 0.05);
+  }
+}

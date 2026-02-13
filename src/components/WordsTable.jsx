@@ -5,6 +5,7 @@ import "./css/WordsTable.css";
 
 const WordsTable = ({ words, renderActions }) => {
   return (
+    <div className="table-responsive-wrapper">
     <table className="words-table">
       <thead>
         <tr>
@@ -45,6 +46,7 @@ const WordsTable = ({ words, renderActions }) => {
         )}
       </tbody>
     </table>
+    </div>
   );
 };
 

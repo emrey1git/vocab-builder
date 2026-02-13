@@ -36,3 +36,18 @@
   background: linear-gradient(90deg, #85AA9F 0%, #6B9A8F 100%);
   transition: width 0.3s ease;
 }
+.progress-bar-container {
+  width: 100%;
+  max-width: 900px;
+  padding: 0 10px;
+}
+
+@media (max-width: 768px) {
+  .progress-info {
+    margin-bottom: 8px;
+  }
+  
+  .progress-label, .progress-percentage {
+    font-size: 14px;
+  }
+}

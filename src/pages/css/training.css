@@ -164,3 +164,80 @@
 .column-title { font-size: 14px; color: rgba(255,255,255,0.5); margin-bottom: 20px; }
 .word-list { display: flex; flex-direction: column; gap: 12px; }
 .word-item { color: white; font-size: 18px; font-weight: 500; }
+.loader-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(248, 249, 250, 0.9); /* Hafif şeffaf beyaz arka plan */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  backdrop-filter: blur(5px);
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid rgba(133, 170, 159, 0.2);
+  border-top: 5px solid #85AA9F; /* Proje yeşili */
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 15px;
+}
+
+.loader-text {
+  font-family: 'Rubik', sans-serif;
+  color: #121417;
+  font-weight: 500;
+  font-size: 18px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+@media (max-width: 768px) {
+  .training-page {
+    padding: 40px 15px;
+  }
+
+  .training-card {
+    flex-direction: column; 
+    min-height: auto;
+  }
+
+  .card-side {
+    padding: 30px 20px;
+    text-align: center;
+  }
+
+  .divider {
+    width: 100%; 
+    height: 1px;
+    margin: 0;
+  }
+
+  .input-side input {
+    font-size: 24px; 
+    text-align: center;
+  }
+
+  .word-side h3 {
+    font-size: 24px;
+    text-align: center;
+  }
+
+  .footer-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .btn-save, .btn-cancel {
+    width: 100%;
+    padding: 15px;
+  }
+}

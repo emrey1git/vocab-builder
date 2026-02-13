@@ -13,8 +13,8 @@ const TrainingPage = () => {
   const navigate = useNavigate();
   const [words, setWords] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [userAnswer, setUserAnswer] = useState(""); // Senin yazdığın Ukraynaca kelime
-  const [answers, setAnswers] = useState([]); // Tüm cevapların biriktiği liste
+  const [userAnswer, setUserAnswer] = useState(""); 
+  const [answers, setAnswers] = useState([]); 
   const [showWellDone, setShowWellDone] = useState(false);
   const [loading, setLoading] = useState(true);
 
@@ -25,8 +25,8 @@ const TrainingPage = () => {
       const results = data.results || [];
       setWords(results);
     } catch (error) {
-      console.error("Yükleme hatası:", error);
-      toast.error("Kelimeler yüklenemedi.");
+      console.error("Loading error:", error);
+      toast.error("Words could not be loaded."); // İngilizceye çevrildi
     } finally {
       setLoading(false);
     }
@@ -39,8 +39,7 @@ const TrainingPage = () => {
   const currentWord = words[currentIndex];
   const isLastWord = currentIndex === words.length - 1;
 
- const handleNext = () => {
-   
+  const handleNext = () => {
     if (!userAnswer.trim()) {
       toast.warning("Please enter a translation before moving to the next word! ✍️", {
         position: "top-right",
@@ -49,16 +48,15 @@ const TrainingPage = () => {
       return; 
     }
 
-   
     const newAnswer = { 
       _id: currentWord?._id,
       en: currentWord?.en, 
       ua: currentWord?.ua, 
-      task: userAnswer.trim() // Senin yazdığın cevap
+      task: userAnswer.trim() 
     };
     
     setAnswers((prev) => [...prev, newAnswer]);
-    setUserAnswer(""); // Kutuyu temizle
+    setUserAnswer("");
 
     if (!isLastWord) {
       setCurrentIndex((prev) => prev + 1);
@@ -66,7 +64,6 @@ const TrainingPage = () => {
   };
 
   const handleSubmit = async () => {
-    // Son kelimeyi de listeye ekle (eğer yazılmışsa)
     const finalAnswer = { 
       _id: currentWord?._id, 
       en: currentWord?.en, 
@@ -76,36 +73,42 @@ const TrainingPage = () => {
     const finalAnswers = [...answers, finalAnswer];
 
     try {
-      // Backend'e gönderiyoruz (ilerleme artsın diye)
       await axiosInstance.post("/words/answers", finalAnswers);
-      // Modalı gösterirken biriktirdiğimiz tüm cevapları gönderiyoruz
       setAnswers(finalAnswers);
       setShowWellDone(true);
     } catch (error) {
-      console.error("Gönderim hatası:", error);
+      console.error("Submission error:", error); // İngilizceye çevrildi
+      toast.error("Failed to save training results."); // İngilizceye çevrildi
       setAnswers(finalAnswers);
       setShowWellDone(true);
     }
   };
 
-  if (loading) return <div className="loader">Yükleniyor...</div>;
+  // Yeni Şık Loading Popup/Overlay
+  if (loading) {
+    return (
+      <div className="loader-overlay">
+        <div className="spinner"></div>
+        <p className="loader-text">Loading words...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="training-page">
       <ProgressBar answered={answers.length} total={words.length} />
 
       <div className="training-card">
-        {/* SOL TARAF: Giriş Alanı (Ukrainian) */}
         <div className="card-side input-side">
           <div>
             <div className="lang-label">
               <img src={uaFlag} className="flag-icon" alt="UA" />
               <span>Ukrainian</span>
             </div>
-            {/* FIGMA: Buraya Ukraynacasını yazıyorsun */}
+        
             <input 
               type="text" 
-              placeholder="Введіть переklad" 
+              placeholder="Enter translation" // İngilizceye çevrildi
               value={userAnswer}
               onChange={(e) => setUserAnswer(e.target.value)}
               autoFocus
@@ -123,7 +126,6 @@ const TrainingPage = () => {
 
         <div className="divider"></div>
 
-        {/* SAĞ TARAF: Soru (English) */}
         <div className="card-side word-side">
           <div>
             <div className="lang-label">

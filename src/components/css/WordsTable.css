@@ -46,3 +46,23 @@
 .add-to-dict-btn:hover {
   color: #85AA9F;
 }
+.table-responsive-wrapper {
+  width: 100%;
+  overflow-x: auto; 
+  -webkit-overflow-scrolling: touch;
+  background: #FFFFFF;
+  border-radius: 15px;
+  border: 1px solid #DBDBDB;
+  margin-bottom: 20px;
+}
+
+.words-table {
+  min-width: 700px; 
+}
+
+@media (max-width: 768px) {
+  .words-table th, .words-table td {
+    padding: 15px 10px; 
+    font-size: 14px;
+  }
+}

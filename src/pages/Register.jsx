@@ -1,12 +1,12 @@
-import { toast } from "react-toastify";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { FiEye, FiEyeOff } from "react-icons/fi";
-import React, {  useState } from "react";
-import { Link } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+import { Link, useNavigate } from "react-router-dom";
 import axiosInstance from "../api/axiosInstance";
-import { useNavigate } from "react-router-dom";
+import "./css/auth.css";
 const schema = yup.object().shape({
   name: yup.string().required("Name is required"),
   email: yup
@@ -24,83 +24,80 @@ const schema = yup.object().shape({
 
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
+  const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(schema),
   });
- const navigate = useNavigate();
-  const onSubmit = async (data) => {
-   
-    try {
-      const response = await axiosInstance.post("/users/signup", data);
-      console.log("Sunucudan gelen cevap:", response.data);
 
-      
-      navigate("/login");
+  const onSubmit = async (data) => {
+    try {
+      await axiosInstance.post("/users/signup", data);
+      toast.success("Registration successful!");
+      setTimeout(() => navigate("/login"), 2000);
     } catch (error) {
-      const errorMessage =
-        error.response?.data?.message || "Bir şeyer ters gitti!";
+      const errorMessage = error.response?.data?.message || "Something went wrong!";
       toast.error(errorMessage);
     }
   };
+
   return (
-    <div className="register-page">
-      <div className="register-form">
-        <div>
-          <h2 className="register-title">Register</h2>
-          <p className="registre-text">
-            To start using our services, please fill out the registration form
-            below. All fields are mandatory:
-          </p>
-        </div>
-        <form className="register-inputs" onSubmit={handleSubmit(onSubmit)}>
-          <input {...register("name")} type="name" placeholder="Name" />
-          {errors.name && (
-            <p className="error-message" style={{ color: "red" }}>
-              {errors.name.message}
-            </p>
-          )}
-
-          <input {...register("email")} type="email" placeholder="Email" />
-          {errors.email && (
-            <p className="error-message" style={{ color: "red" }}>
-              {errors.email.message}
-            </p>
-          )}
-
-          <input
-            {...register("password")}
-            type={showPassword ? "text" : "password"}
-            placeholder="Password"
-          />
-          {errors.password && (
-            <p className="error-message" style={{ color: "red" }}>
-              {errors.password.message}
-            </p>
-          )}
-
-          <button
-            type="button"
-            className="register-password-toggle"
-            onClick={() => setShowPassword(!showPassword)}
-          >
-            {showPassword ? <FiEyeOff size={20} /> : <FiEye size={20} />}
-          </button>
-          <div className="register-buttons">
-            <button type="submit" className="register-register-btn">
-              Register
-            </button>
-            <Link to="/login" type="button" className="login-login-btn">
-              Login
-            </Link>
+    <div className="auth-page">
+      <div className="auth-card">
+        <div className="login-form-container">
+          <div className="auth-logo">
+             <img src="/src/assets/logo.png" alt="Logo" />
+             <span>VocabBuilder</span>
           </div>
-        </form>
+
+          <div className="auth-header">
+            <h2 className="login-title">Register</h2>
+            <p className="login-text">
+              To start using our services, please fill out the registration form below:
+            </p>
+          </div>
+
+          <form className="auth-form-fields" onSubmit={handleSubmit(onSubmit)}>
+            <div className="input-wrapper">
+              <input {...register("name")} type="text" placeholder="Name" />
+              {errors.name && <p className="error-text">{errors.name.message}</p>}
+            </div>
+
+            <div className="input-wrapper">
+              <input {...register("email")} type="email" placeholder="Email" />
+              {errors.email && <p className="error-text">{errors.email.message}</p>}
+            </div>
+
+            <div className="input-wrapper password-input-container">
+              <input
+                {...register("password")}
+                type={showPassword ? "text" : "password"}
+                placeholder="Password"
+              />
+              <button
+                type="button"
+                className="password-toggle-btn"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? <FiEyeOff size={20} /> : <FiEye size={20} />}
+              </button>
+              {errors.password && <p className="error-text">{errors.password.message}</p>}
+            </div>
+
+            <div className="auth-button-group">
+              <button type="submit" className="login-login-btn">Register</button>
+              <Link to="/login" className="login-register-link">Login</Link>
+            </div>
+          </form>
+        </div>
+
+        <div className="auth-hero-banner">
+          <img src="/src/assets/illustration.png" alt="Illustration" className="hero-img" />
+          <p className="hero-footer-text">Word · Translation · Grammar · Progress</p>
+          <img src="/src/assets/Vector (2).png" alt="Vector" className="vector-shadow" />
+        </div>
       </div>
-      <div className="register-page-picture"></div>
+      <ToastContainer position="bottom-right" />
     </div>
   );
 };

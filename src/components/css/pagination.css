@@ -50,3 +50,22 @@
   border-color: #85AA9F;
   color: #85AA9F;
 }
+
+.pagination-wrapper {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+@media (max-width: 768px) {
+  .page-num, .page-control {
+    width: 30px; 
+    height: 30px;
+    font-size: 13px;
+  }
+  
+  .page-numbers-row {
+    gap: 4px;
+  }
+}

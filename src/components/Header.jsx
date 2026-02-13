@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { getUserInfo } from "../api/wordService.js";
+import { LuMenu, LuX } from "react-icons/lu"; 
 import "./css/header.css";
 
 const Header = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [userName, setUserName] = useState("User");
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false); 
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -30,6 +33,8 @@ const Header = () => {
     navigate("/login");
   };
 
+  const isActive = (path) => location.pathname === path ? "active" : "";
+
   return (
     <header className="header">
       <div className="logo-container">
@@ -41,14 +46,27 @@ const Header = () => {
         </Link>
       </div>
 
-      <nav className="header-navs">
-        <Link to="/dictionary" className="nav-link active">
+      {/* Menü listesi - Mobil durumuna göre class alıyor */}
+      <nav className={`header-navs ${isMenuOpen ? "mobile-open" : ""}`}>
+        <Link 
+          to="/dictionary" 
+          className={`nav-link ${isActive("/dictionary")}`}
+          onClick={() => setIsMenuOpen(false)}
+        >
           Dictionary
         </Link>
-        <Link to="/recommend" className="nav-link">
+        <Link 
+          to="/recommend" 
+          className={`nav-link ${isActive("/recommend")}`}
+          onClick={() => setIsMenuOpen(false)}
+        >
           Recommend
         </Link>
-        <Link to="/training" className="nav-link">
+        <Link 
+          to="/training" 
+          className={`nav-link ${isActive("/training")}`}
+          onClick={() => setIsMenuOpen(false)}
+        >
           Training
         </Link>
       </nav>
@@ -62,6 +80,11 @@ const Header = () => {
         </div>
         <button className="logout-btn" onClick={() => setIsLogoutModalOpen(true)}>
           Log out &rarr;
+        </button>
+
+        {/* Burger Butonu - Sadece Mobilde Görünür */}
+        <button className="burger-icon" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+          {isMenuOpen ? <LuX /> : <LuMenu />}
         </button>
       </div>
 

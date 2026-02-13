@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { toast } from "react-toastify";
-import {createNewWord} from "../api/wordService.js"
+import { createNewWord } from "../api/wordService.js";
+import ukFlag from "../assets/united kingdom.png";
+import uaFlag from "../assets/ukraine (1).png";
 import "./css/AddWordModal.css";
 
-const AddWordModal = ({ close , getWords}) => {
+const AddWordModal = ({ close, getWords }) => {
   const [formData, setFormData] = useState({
     en: "",
     ua: "",
@@ -18,7 +20,7 @@ const AddWordModal = ({ close , getWords}) => {
       toast.error("Please enter the English word.");
       return;
     }
-    const enRegex = /^[a-zA-Z\s]+$/; 
+    const enRegex = /^[a-zA-Z\s]+$/;
     if (!enRegex.test(formData.en)) {
       toast.error("English field must contain only Latin letters.");
       return;
@@ -27,11 +29,12 @@ const AddWordModal = ({ close , getWords}) => {
       toast.error("Please enter the Ukrainian word.");
       return;
     }
-     const uaRegex = /^(?![0-9]+$)[а-яА-ЯёЁіІїЇєЄґҐ\s]+$/; 
-      if (!uaRegex.test(formData.ua)) {
-        toast.error("Ukrainian field must contain only Cyrillic letters.");
-        return;
-      }
+    const uaRegex = /^(?![0-9]+$)[а-яА-ЯёЁіІїЇєЄґҐ\s]+$/;
+    if (!uaRegex.test(formData.ua)) {
+      toast.error("Ukrainian field must contain only Cyrillic letters.");
+      return;
+    }
+
     try {
       const created = await createNewWord(formData);
       window.dispatchEvent(new CustomEvent("wordsUpdated", { detail: created }));
@@ -100,7 +103,8 @@ const AddWordModal = ({ close , getWords}) => {
                   value="regular"
                   checked={formData.isRegular}
                   onChange={handleChange}
-                />{" "}
+                />
+                <span className="radio-custom"></span>
                 Regular
               </label>
               <label className="radio-label">
@@ -110,33 +114,40 @@ const AddWordModal = ({ close , getWords}) => {
                   value="irregular"
                   checked={!formData.isRegular}
                   onChange={handleChange}
-                />{" "}
+                />
+                <span className="radio-custom"></span>
                 Irregular
               </label>
             </div>
           )}
 
-    
-          <div className="fields-row">
-            <div className="input-wrapper">
-              <label>Ukrainian</label>
+          <div className="add-fields-stack">
+            <div className="add-input-group">
               <input
                 type="text"
                 name="ua"
-                placeholder="Введіть переклад"
+                placeholder="Ukrainian translation"
                 value={formData.ua}
                 onChange={handleChange}
               />
+              <div className="add-lang-info">
+                <img src={uaFlag} alt="UA" className="add-flag" />
+                <span>Ukrainian</span>
+              </div>
             </div>
-            <div className="input-wrapper">
-              <label>English</label>
+
+            <div className="add-input-group">
               <input
                 type="text"
                 name="en"
-                placeholder="Enter word"
+                placeholder="English word"
                 value={formData.en}
                 onChange={handleChange}
               />
+              <div className="add-lang-info">
+                <img src={ukFlag} alt="UK" className="add-flag" />
+                <span>English</span>
+              </div>
             </div>
           </div>
 
