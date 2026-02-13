@@ -1,16 +1,36 @@
-# React + Vite
+# 📚 VocabBuilder - Vocabulary Learning Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+VocabBuilder is a modern web application designed to help users learn English and Ukrainian vocabulary efficiently. Developed as part of the GoIT curriculum, this app allows users to build their own dictionary, get recommendations, and test their skills through interactive training sessions.
 
-Currently, two official plugins are available:
+## 🚀 Live Demo
+[**View the Live Project on Vercel**](https://vocab-builder-henna.vercel.app)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ✨ Features
+- **User Authentication:** Secure registration and login using JWT (JSON Web Tokens).
+- **Personal Dictionary:** Full CRUD (Create, Read, Update, Delete) functionality for managing your vocabulary.
+- **Smart Training:** Interactive flashcard-style learning with progress tracking and performance summaries.
+- **Word Recommendations:** Access a global list of recommended words to expand your learning.
+- **Responsive Design:** Optimized for a seamless experience on Desktop, Tablet, and Mobile devices.
+- **Real-time Notifications:** Feedback via React Toastify for successful actions and errors.
 
-## React Compiler
+## 🛠️ Tech Stack
+- **Frontend Framework:** React.js (Vite)
+- **Routing:** React Router DOM
+- **HTTP Client:** Axios (with Interceptors for Authorization)
+- **Styling:** CSS3 (Flexbox, Grid, Responsive Design)
+- **UI Feedback:** React Toastify, Lucide React (Icons)
+- **API:** GoIT Vocabulary Builder Backend API
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 📦 Installation & Setup
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/KULLANICI_ADIN/PROJE_ADIN.git
+2. npm install
+3. npm run dev
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 📂 Project Structure
+- `/src/api`: Axios instance and service functions for API calls.
+- `/src/components`: UI components and their specific CSS files.
+- `/src/pages`: Main page components and their dedicated CSS files.
+- `/src/assets`: Local images and icons (if any).
+- `/public`: Static assets, flags, and images accessible via root path..
