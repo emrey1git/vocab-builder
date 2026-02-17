@@ -72,6 +72,8 @@ export const getTrainingWords = async () => {
   }
 };
 export const getUserInfo = async () => {
+  const token = localStorage.getItem('token');
+  if (!token) return;
   try {
     const response = await axiosInstance.get("/users/current");
     return response.data;

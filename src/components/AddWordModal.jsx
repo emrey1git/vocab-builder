@@ -130,7 +130,7 @@ const AddWordModal = ({ close, getWords }) => {
                 onChange={handleChange}
               />
               <div className="add-lang-info">
-                <img src="/ukraine (1).png" alt="UA" className="add-flag" />
+                <img src="/ukraine-1.png" alt="UA" className="add-flag" />
                 <span>Ukrainian</span>
               </div>
             </div>

@@ -47,7 +47,7 @@ const EditWordModal = ({ word, close, onSuccess }) => {
                 placeholder="Ukrainian translation"
               />
               <div className="edit-lang-info">
-                <img src="/ukraine (1).png" alt="UA" className="edit-flag" />
+                <img src="/ukraine-1.png" alt="UA" className="edit-flag" />
                 <span>Ukrainian</span>
               </div>
             </div>

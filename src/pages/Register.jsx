@@ -16,10 +16,7 @@ import axiosInstance from "../api/axiosInstance";
 
 import "./css/auth.css";
 
-
-
 const schema = yup.object().shape({
-
   name: yup.string().required("Name is required"),
 
   email: yup
@@ -37,195 +34,130 @@ const schema = yup.object().shape({
     .required("Password is required")
 
     .matches(
-
       /^(?=(?:.*[a-zA-Z]){6})(?=(?:.*\d){1}).{7}$/,
 
-      "Password must have exactly 6 letters and 1 number (7 characters total)"
-
+      "Password must have exactly 6 letters and 1 number (7 characters total)",
     ),
-
 });
 
-
-
 const Register = () => {
-
   const [showPassword, setShowPassword] = useState(false);
 
   const navigate = useNavigate();
 
+  const {
+    register,
 
+    handleSubmit,
 
-  const { 
-
-    register, 
-
-    handleSubmit, 
-
-    formState: { errors } 
-
+    formState: { errors },
   } = useForm({
-
     resolver: yupResolver(schema),
 
-    mode: "onTouched"
-
+    mode: "onSubmit",
   });
 
-
-
-  if (Object.keys(errors).length > 0) {
-
-    console.log("Validation Errors:", errors);
-
-  }
-
-
-
   const onSubmit = async (data) => {
-
     try {
-
-      console.log("Form Data being sent:", data); 
-
       await axiosInstance.post("/users/signup", data);
 
       toast.success("Registration successful!");
 
       setTimeout(() => navigate("/login"), 2000);
-
     } catch (error) {
-
-      const errorMessage = error.response?.data?.message || "Registration failed!";
+      const errorMessage =
+        error.response?.data?.message || "Registration failed!";
 
       toast.error(errorMessage);
-
     }
-
   };
 
-
-
   return (
-
     <div className="auth-page">
-
       <div className="auth-card">
-
         <div className="login-form-container">
-
           <div className="auth-logo">
+            <img src="/logo.png" alt="Logo" />
 
-             <img src="/logo.png" alt="Logo" />
-
-             <span>VocabBuilder</span>
-
+            <span>VocabBuilder</span>
           </div>
 
-
-
           <div className="auth-header">
-
             <h2 className="login-title">Register</h2>
 
             <p className="login-text">
-
-              To start using our services, please fill out the registration form below:
-
+              To start using our services, please fill out the registration form
+              below:
             </p>
-
           </div>
 
-
-
           <form className="auth-form-fields" onSubmit={handleSubmit(onSubmit)}>
-
             <div className="input-wrapper">
-
               <input {...register("name")} type="text" placeholder="Name" />
 
-              {errors.name && <p className="error-text">{errors.name.message}</p>}
-
+              {errors.name && (
+                <p className="error-text">{errors.name.message}</p>
+              )}
             </div>
-
-
 
             <div className="input-wrapper">
-
               <input {...register("email")} type="email" placeholder="Email" />
 
-              {errors.email && <p className="error-text">{errors.email.message}</p>}
-
+              {errors.email && (
+                <p className="error-text">{errors.email.message}</p>
+              )}
             </div>
 
-
-
             <div className="input-wrapper password-input-container">
-
               <input
-
                 {...register("password")}
-
                 type={showPassword ? "text" : "password"}
-
                 placeholder="Password"
-
               />
 
               <button
-
                 type="button"
-
                 className="password-toggle-btn"
-
                 onClick={() => setShowPassword(!showPassword)}
-
               >
-
                 {showPassword ? <FiEyeOff size={20} /> : <FiEye size={20} />}
-
               </button>
 
-              {errors.password && <p className="error-text">{errors.password.message}</p>}
-
+              {errors.password && (
+                <p className="error-text">{errors.password.message}</p>
+              )}
             </div>
-
-
 
             <div className="auth-button-group">
+              <button type="submit" className="login-login-btn">
+                Register
+              </button>
 
-              <button type="submit" className="login-login-btn">Register</button>
-
-              <Link to="/login" className="login-register-link">Login</Link>
-
+              <Link to="/login" className="login-register-link">
+                Login
+              </Link>
             </div>
-
           </form>
-
         </div>
-
-
 
         <div className="auth-hero-banner">
+          <img
+            src="/illustration.png"
+            alt="Illustration"
+            className="hero-img"
+          />
 
-          <img src="/illustration.png" alt="Illustration" className="hero-img" />
+          <p className="hero-footer-text">
+            Word · Translation · Grammar · Progress
+          </p>
 
-          <p className="hero-footer-text">Word · Translation · Grammar · Progress</p>
-
-          <img src="/Vector (2).png" alt="Vector" className="vector-shadow" />
-
+          <img src="/vector-2.png" alt="Vector" className="vector-shadow" />
         </div>
-
       </div>
 
       <ToastContainer position="bottom-right" />
-
     </div>
-
   );
-
 };
-
-
 
 export default Register;

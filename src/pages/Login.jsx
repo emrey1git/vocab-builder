@@ -94,7 +94,7 @@ const Login = () => {
         <div className="auth-hero-banner">
           <img src="/illustration.png" alt="Illustration" className="hero-img" />
           <p className="hero-footer-text">Word · Translation · Grammar · Progress</p>
-          <img src="/Vector (2).png" alt="Vector" className="vector-shadow" />
+          <img src="/vector-2.png" alt="Vector" className="vector-shadow" />
         </div>
       </div>
       <ToastContainer position="bottom-right" />

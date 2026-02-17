@@ -100,7 +100,7 @@ const TrainingPage = () => {
         <div className="card-side input-side">
           <div>
             <div className="lang-label">
-              <img src="/ukraine (1).png" className="flag-icon" alt="UA" />
+              <img src="/ukraine-1.png" className="flag-icon" alt="UA" />
               <span>Ukrainian</span>
             </div>
         

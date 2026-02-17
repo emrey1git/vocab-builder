@@ -17,7 +17,7 @@ const WordsTable = ({ words, renderActions }) => {
           <th>
             <span className="th-content">
               <span>Translation</span>
-              <img src="/ukraine (1).png" alt="Ukraine Flag" className="flag-icon" />
+              <img src="/ukraine-1.png" alt="Ukraine Flag" className="flag-icon" />
             </span>
           </th>
           <th>Category</th>
