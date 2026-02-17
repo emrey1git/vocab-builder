@@ -24,7 +24,7 @@ VocabBuilder is a modern web application designed to help users learn English an
 ## 📦 Installation & Setup
 1. Clone the repository:
    ```bash
-   git clone https://github.com/KULLANICI_ADIN/PROJE_ADIN.git
+   git clone https://github.com/emrey1git/vocab-builder.git
 2. npm install
 3. npm run dev
 
