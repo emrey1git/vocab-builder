@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosInstance = axios.create({
-  baseURL: "https://vocab-builder-backend.p.goit.global/api",
+  baseURL: "https://vocab-builder-backend.p.goit.global/api-docs/",
   timeout: 5000,
 });
 
